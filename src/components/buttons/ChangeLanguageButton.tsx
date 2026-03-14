@@ -8,7 +8,7 @@ export const ChangeLanguageButton = () => {
   };
 
   return (
-    <div className="flex justify-between mt-5">
+    <div className="flex justify-between mt-5 gap-3">
       <button
         onClick={() => changeLanguage('id')}
         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"

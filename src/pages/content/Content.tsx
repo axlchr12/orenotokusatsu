@@ -9,7 +9,6 @@ export const Content = () => {
         <h1>Get started</h1>
         <p>
           Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          tes cenah
         </p>
         <p>test cenah {translate('welcome')}</p>
         <ChangeLanguageButton />
