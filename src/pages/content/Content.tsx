@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+import { ChangeLanguageButton } from '../../components';
+
 export const Content = () => {
+  const { t: translate } = useTranslation();
   return (
     <section id="mainContent">
       <div>
@@ -7,6 +11,8 @@ export const Content = () => {
           Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           tes cenah
         </p>
+        <p>test cenah {translate('welcome')}</p>
+        <ChangeLanguageButton />
       </div>
     </section>
   );
