@@ -17,7 +17,7 @@
   text-align: left;
 
   & > div {
-    padding: 12px;
+    padding: 5px;
   }
 
   @media (max-width: 1024px) {

@@ -8,12 +8,12 @@ export const Footer = () => {
     <>
       <section id="footer">
         <div id="copyright">
-          <span className="text-sm">
+          <span className="text-[13px] tracking-tighter">
             &copy; {currentYear} {appName}-{appVersion}. All Rights Reserved. |
             Inspired by&nbsp;
             <a
               href="https://otaku-song.pages.dev/"
-              className="underline text-amber-600"
+              className="underline text-amber-800"
               target="_blank"
               rel="noopener noreferrer"
             >

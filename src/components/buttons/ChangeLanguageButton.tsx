@@ -1,32 +1,32 @@
 import { useTranslation } from 'react-i18next';
+import { Button } from './Button';
 
 export const ChangeLanguageButton = () => {
   const { i18n } = useTranslation();
+
+  const currentLanguage = i18n.language;
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
   };
 
+  const buttonConfigs = [
+    { label: 'Bahasa Indonesia', code: 'id' },
+    { label: 'English', code: 'en' },
+    { label: '日本語', code: 'ja' },
+  ];
+
   return (
-    <div className="flex justify-between mt-5 gap-3">
-      <button
-        onClick={() => changeLanguage('id')}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Bahasa Indonesia
-      </button>
-      <button
-        onClick={() => changeLanguage('en')}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        English
-      </button>
-      <button
-        onClick={() => changeLanguage('ja')}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        日本語
-      </button>
+    <div className="flex gap-2 justify-center mb-2">
+      {buttonConfigs.map(config => (
+        <Button
+          key={config.code}
+          onClick={() => changeLanguage(config.code)}
+          isActive={currentLanguage === config.code}
+        >
+          {config.label}
+        </Button>
+      ))}
     </div>
   );
 };
