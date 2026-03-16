@@ -11,13 +11,13 @@ export const ChangeLanguageButton = () => {
   };
 
   const buttonConfigs = [
-    { label: 'Bahasa Indonesia', code: 'id' },
-    { label: 'English', code: 'en' },
-    { label: '日本語', code: 'ja' },
+    { label: 'ID', code: 'id' },
+    { label: 'EN', code: 'en' },
+    { label: 'JP', code: 'ja' },
   ];
 
   return (
-    <div className="flex gap-2 justify-center mb-2">
+    <div className="flex gap-1 items-center justify-center mb-2">
       {buttonConfigs.map(config => (
         <Button
           key={config.code}

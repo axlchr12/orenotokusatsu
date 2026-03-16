@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
+  /* --text: #6b6375; */
+  /* --text-h: #08060d; */
   --bg: #6a7282;
   --border: #e5e4e7;
 
-  --sans: 'RocknRoll One', Roboto, sans-serif;
-  --heading: 'RocknRoll One', Roboto, sans-serif;
+  --sans: 'Noto Sans JP', Roboto, sans-serif;
+  --heading: 'Noto Sans JP', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -28,8 +28,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: black;
-    --text-h: #f3f4f6;
+    /* --text: black; */
+    /* --text-h: #08060d; */
     --bg: #ccdbdc;
     --border: #2e303a;
   }
@@ -51,31 +51,6 @@ body {
   margin: 0;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
 p {
   margin: 0;
 }
