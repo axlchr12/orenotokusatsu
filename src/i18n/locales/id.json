@@ -8,5 +8,6 @@
   "searchResults": "Hasil pencarian untuk \"{{query}}\"",
   "dataNotFound": "Data tidak ditemukan!",
   "onLoadingData": "Sedang memuat data...",
-  "duplicateEntries": "\"{{title}}\" sudah ada di daftar!"
+  "duplicateEntries": "\"{{title}}\" sudah ada di daftar!",
+  "watermark": "Dibuat di {{appName}}-{{appVersion}}"
 }

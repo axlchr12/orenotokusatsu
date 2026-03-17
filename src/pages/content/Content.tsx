@@ -4,6 +4,8 @@ import { TitleSelectionList } from './TitleSelectionList';
 import { ExportGrid } from './ExportGrid';
 import { useRef } from 'react';
 import { useApp } from '../../context';
+const appName = import.meta.env.APP_NAME;
+const appVersion = import.meta.env.APP_VERSION;
 
 export const Content = () => {
   const { t: translate, i18n } = useTranslation();
@@ -36,6 +38,9 @@ export const Content = () => {
           appState={appState}
           currentLanguage={currentLanguage}
         />
+        <div className="watermark-only text-xs text-gray-300 font-mono">
+          {translate('watermark', { appName, appVersion })}
+        </div>
       </section>
       <div id="exportGrid" className="flex justify-center mb-5">
         <ExportGrid

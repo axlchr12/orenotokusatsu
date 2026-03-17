@@ -8,5 +8,6 @@
   "searchResults": "検索結果 「{{query}}」",
   "dataNotFound": "データが見つかりません!",
   "onLoadingData": "データローディング中...",
-  "duplicateEntries": "「{{title}}」 は既にリストに存在します！"
+  "duplicateEntries": "「{{title}}」 は既にリストに存在します！",
+  "watermark": "{{appName}}-{{appVersion}} で生成された"
 }

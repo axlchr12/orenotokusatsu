@@ -4,6 +4,7 @@ import type { TranslateProps } from '../../dataHook';
 import { SearchForm } from '../../components';
 import { SelectionShowList } from './SelectionShowList';
 import { DuplicateErrorAlert } from './DuplicateErrorAlert';
+import classNames from 'classnames';
 
 type SelectionModalProps = {
   show: boolean;
@@ -97,12 +98,24 @@ export const SelectionModal = ({
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div
-          className={`fixed inset-0 bg-black/55 backdrop-blur-sm transition-opacity animate-fade-in ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+          className={classNames(
+            'fixed inset-0 bg-black/55 backdrop-blur-sm transition-opacity',
+            {
+              'animate-fade-out': isClosing,
+              'animate-fade-in': !isClosing,
+            },
+          )}
           onClick={_onClose}
         />
 
         <div
-          className={`relative bg-white rounded-xl shadow-xl w-full max-w-xs sm:max-w-md transform transition-all overflow-hidden ${isClosing ? 'animate-modal-out' : 'animate-modal-in'}`}
+          className={classNames(
+            'relative bg-white rounded-xl shadow-xl w-full max-w-xs sm:max-w-md transform transition-all overflow-hidden',
+            {
+              'animate-modal-out': isClosing,
+              'animate-modal-in': !isClosing,
+            },
+          )}
         >
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-gray-800">
