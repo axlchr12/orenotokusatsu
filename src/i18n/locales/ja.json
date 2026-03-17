@@ -1,13 +1,15 @@
 {
   "title": "俺の<0>特撮</0>",
-  "description": "好きな特撮作品を選んで、そしてSNSでシェアしよう!",
+  "description": "好きな特撮作品を選んで、SNSでシェアしよう！",
   "titleModal": "作品を検索",
   "addItem": "追加する",
   "search": "検索",
-  "searchPlaceholder": "ここで探索... (例えば仮面ライダーゼッツ)",
-  "searchResults": "検索結果 「{{query}}」",
-  "dataNotFound": "データが見つかりません!",
-  "onLoadingData": "データローディング中...",
-  "duplicateEntries": "「{{title}}」 は既にリストに存在します！",
-  "watermark": "{{appName}}-{{appVersion}} で生成された"
+  "searchPlaceholder": "作品名を入力... (例：仮面ライダー)",
+  "searchResults": "「{{query}}」の検索結果",
+  "dataNotFound": "データが見つかりませんでした",
+  "onLoadingData": "読み込み中...",
+  "duplicateEntries": "「{{title}}」は既にリストに存在します",
+  "watermark": "{{appName}}-{{appVersion}} で作成",
+  "share": "シェアする",
+  "shareOnProcess": "共有処理中..."
 }

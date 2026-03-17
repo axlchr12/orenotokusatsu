@@ -123,7 +123,7 @@ export const SelectionModal = ({
             </h3>
             <button
               onClick={_onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors text-2xl"
+              className="text-gray-400 hover:text-gray-600 transition-colors text-2xl cursor-pointer"
             >
               &times;
             </button>

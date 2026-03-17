@@ -19,7 +19,7 @@ export const Content = () => {
     <>
       <section id="mainContent" ref={contentRef}>
         <div id="heading">
-          <h1 className="mb-1 text-2xl sm:text-4xl tracking-wide text-amber-700 ">
+          <h1 className="mb-1.5 text-2xl sm:text-4xl tracking-wide text-amber-700 ">
             <Trans
               i18nKey="title"
               components={[
@@ -42,7 +42,7 @@ export const Content = () => {
           {translate('watermark', { appName, appVersion })}
         </div>
       </section>
-      <div id="exportGrid" className="flex justify-center mb-5">
+      <div id="exportGrid" className="flex justify-center mb-3">
         <ExportGrid
           translate={translate}
           contentRef={contentRef}

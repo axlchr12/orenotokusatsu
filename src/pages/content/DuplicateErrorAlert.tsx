@@ -36,7 +36,7 @@ export const DuplicateErrorAlert = ({
         <div className="flex-1 text-xs sm:text-sm font-medium">{message}</div>
         <button
           onClick={onClose}
-          className=" hover:bg-black/5 transition-colors text-sm text-red-800"
+          className=" hover:bg-black/5 transition-colors text-sm text-red-800 cursor-pointer"
         >
           &times;
         </button>

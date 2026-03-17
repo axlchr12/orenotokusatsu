@@ -1,13 +1,15 @@
 {
   "title": "<0>Tokusatsu</0>Ku",
-  "description": "Pilih karya Tokusatsu favoritmu dan share ke sosmedmu!",
-  "titleModal": "Cari karya",
-  "addItem": "Tambahkan",
+  "description": "Pilih serial Tokusatsu favoritmu dan bagikan ke media sosial!",
+  "titleModal": "Cari Judul",
+  "addItem": "Tambah",
   "search": "Cari",
-  "searchPlaceholder": "Cari di sini... (misal: Kamen Rider Zeztz)",
+  "searchPlaceholder": "Cari judul... (misal: Kamen Rider Zeztz)",
   "searchResults": "Hasil pencarian untuk \"{{query}}\"",
-  "dataNotFound": "Data tidak ditemukan!",
-  "onLoadingData": "Sedang memuat data...",
-  "duplicateEntries": "\"{{title}}\" sudah ada di daftar!",
-  "watermark": "Dibuat di {{appName}}-{{appVersion}}"
+  "dataNotFound": "Hasil tidak ditemukan",
+  "onLoadingData": "Memuat data...",
+  "duplicateEntries": "\"{{title}}\" sudah ada di daftar kamu",
+  "watermark": "Dibuat dengan {{appName}}-{{appVersion}}",
+  "share": "Bagikan!",
+  "shareOnProcess": "Memproses..."
 }

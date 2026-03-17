@@ -55,7 +55,7 @@ export const SelectionShowList = ({
         delayedResults.map((show: any, index: number) => (
           <div
             key={show?.id || index}
-            className="flex items-center gap-3 p-2 hover:bg-gray-200 rounded-xl cursor-pointer transition-colors mb-1 group"
+            className="flex items-center gap-3 p-2 hover:bg-gray-200 rounded-xl cursor-pointer transition-all mb-1 group active:scale-75"
             onClick={() => {
               handleAddWork(show);
             }}
@@ -70,19 +70,19 @@ export const SelectionShowList = ({
             </div>
 
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-500 truncate sm:whitespace-normal">
+              <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-600 truncate sm:whitespace-normal">
                 {show.title}
               </h4>
 
               {show?.titleJapanese && show?.titleJapanese !== show?.title && (
-                <p className="text-[11px] text-gray-500 italic truncate sm:whitespace-normal">
+                <p className="text-[11px] text-gray-500 italic truncate sm:whitespace-normal group-hover:text-sky-600">
                   {show.titleJapanese}
                 </p>
               )}
             </div>
 
             <div className="min-w-0">
-              <div className="text-gray-400 text-4xl font-light group-hover:text-sky-400 transition-colors">
+              <div className="text-gray-400 text-4xl font-light group-hover:text-sky-600 transition-colors">
                 +
               </div>
             </div>

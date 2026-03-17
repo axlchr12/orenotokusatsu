@@ -1,13 +1,15 @@
 {
   "title": "My <0>Tokusatsu</0>",
-  "description": "Pick your favorite Tokusatsu works and share it to your social media!",
-  "titleModal": "Search works",
+  "description": "Pick your favorite Tokusatsu titles and share them on social media!",
+  "titleModal": "Search Titles",
   "addItem": "Add",
   "search": "Search",
-  "searchPlaceholder": "Search here... (e.g. Kamen Rider Zeztz)",
+  "searchPlaceholder": "Search for... (e.g. Kamen Rider Zeztz)",
   "searchResults": "Search results for \"{{query}}\"",
-  "dataNotFound": "Data not found!",
+  "dataNotFound": "No results found",
   "onLoadingData": "Loading data...",
-  "duplicateEntries": "\"{{title}}\" is already in the list!",
-  "watermark": "Generated in {{appName}}-{{appVersion}}"
+  "duplicateEntries": "\"{{title}}\" is already in your list",
+  "watermark": "Made with {{appName}}-{{appVersion}}",
+  "share": "Share!",
+  "shareOnProcess": "Sharing..."
 }

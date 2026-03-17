@@ -35,7 +35,7 @@ export const SelectionGrid = ({
                     e.stopPropagation();
                     handleRemoveWork(index);
                   }}
-                  className="absolute top-0 right-0 z-40 bg-red-600 hover:bg-red-600 text-white w-7 h-7 sm:w-6 sm:h-6 rounded-bl-lg flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl no-export"
+                  className="absolute top-0 right-0 z-40 bg-red-600 hover:bg-red-600 text-white w-7 h-7 sm:w-6 sm:h-6 rounded-bl-lg flex items-center justify-center transition-all hover:scale-105 active:scale-75 shadow-xl no-export cursor-pointer"
                 >
                   <span className="text-lg font-bold">&times;</span>
                 </button>

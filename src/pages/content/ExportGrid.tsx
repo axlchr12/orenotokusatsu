@@ -86,20 +86,21 @@ export const ExportGrid = ({
     <button
       onClick={_onClick}
       className={classNames(
-        'flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white transition-all',
+        'px-4 py-2.5 rounded-xl shadow-xl font-bold text-white transition-all',
         {
           'bg-gray-400 cursor-not-allowed': disabled,
-          'bg-sky-600 hover:bg-sky-700 active:scale-95': !disabled,
+          'bg-sky-600 hover:bg-sky-700 active:scale-75 cursor-pointer':
+            !disabled,
         },
       )}
     >
       {isExporting ? (
         <>
-          <span className="animate-pulse">Processing...</span>
+          <span className="animate-pulse">{translate('shareOnProcess')}</span>
         </>
       ) : (
         <>
-          <span>Share My List</span>
+          <span>{translate('share')}</span>
         </>
       )}
     </button>

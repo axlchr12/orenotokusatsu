@@ -22,7 +22,7 @@ const parseJapaneseTitle = (content: string, fallback: string) => {
 };
 
 const fetchFandomToku = async (domain: string, category: string) => {
-  const url = `https://${domain}.fandom.com/api.php?action=query&generator=categorymembers&gcmtitle=Category:${category}&gcmlimit=50&prop=pageimages|categories|revisions&piprop=thumbnail&pithumbsize=600&cllimit=max&rvprop=content&rvslots=main&rvsection=0&format=json&origin=*`;
+  const url = `https://${domain}.fandom.com/api.php?action=query&generator=categorymembers&gcmtitle=Category:${category}&gcmlimit=200&prop=pageimages|revisions&piprop=thumbnail&pithumbsize=600&cllimit=max&rvprop=content&rvslots=main&rvsection=0&format=json&origin=*`;
 
   try {
     const response = await fetch(url);
@@ -30,7 +30,9 @@ const fetchFandomToku = async (domain: string, category: string) => {
     if (!data.query) return [];
 
     return Object.values(data.query.pages)
-      .filter((data: any) => data?.thumbnail)
+      .filter(
+        (data: any) => data?.thumbnail && !data?.title?.includes('Category'),
+      )
       .map((page: any) => {
         return {
           id: page.pageid,
@@ -60,6 +62,8 @@ export const useTokusatsuData = () => {
     { domain: 'powerrangers', cat: 'Season' },
     { domain: 'ultraseries', cat: 'Series' },
     { domain: 'tokusatsu', cat: 'Shows' },
+    { domain: 'project-red', cat: 'Series' },
+    { domain: 'metalheroes', cat: 'Series' },
   ];
 
   const queryResults = useQueries({
