@@ -37,7 +37,7 @@ export const Content = () => {
           currentLanguage={currentLanguage}
         />
       </section>
-      <div id="exportGrid" className="my-0">
+      <div id="exportGrid" className="flex justify-center mb-5">
         <ExportGrid
           translate={translate}
           contentRef={contentRef}
