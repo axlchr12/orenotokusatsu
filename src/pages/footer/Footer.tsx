@@ -7,17 +7,16 @@ export const Footer = () => {
   return (
     <>
       <section id="footer">
-        <div id="copyright">
+        <div id="copyright" className="flex items-center justify-center ">
           <span className="text-[13px] tracking-tighter">
             &copy; {currentYear} {appName}-{appVersion}. All Rights Reserved. |
-            Inspired by&nbsp;
             <a
-              href="https://otaku-song.pages.dev/"
-              className="underline text-amber-800"
+              href="https://github.com/axlchr12/orenotokusatsu/"
+              className="text-amber-800 mx-1"
               target="_blank"
               rel="noopener noreferrer"
             >
-              俺のオタクソング9選
+              Github
             </a>
           </span>
         </div>
