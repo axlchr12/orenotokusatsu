@@ -22,7 +22,7 @@ export const SelectionGrid = ({
         {selectedTokuWorks.map((item, index) => (
           <div
             key={item?.id || index}
-            className="relative flex flex-col items-center justify-center aspect-square border border-gray-100 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all shadow-xl overflow-hidden backdrop-blur-sm "
+            className="relative flex flex-col items-center justify-center aspect-square border border-gray-100 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all shadow-xl overflow-hidden backdrop-blur-sm"
             onClick={() => !item && onOpenModal(index)}
           >
             <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700 px-2 py-1 rounded-br-lg z-30 shadow-xl transition-shadow">
@@ -35,7 +35,7 @@ export const SelectionGrid = ({
                     e.stopPropagation();
                     handleRemoveWork(index);
                   }}
-                  className="absolute top-0 right-0 z-40 bg-red-600 hover:bg-red-600 text-white w-7 h-7 sm:w-6 sm:h-6 rounded-bl-lg flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl"
+                  className="absolute top-0 right-0 z-40 bg-red-600 hover:bg-red-600 text-white w-7 h-7 sm:w-6 sm:h-6 rounded-bl-lg flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl no-export"
                 >
                   <span className="text-lg font-bold">&times;</span>
                 </button>

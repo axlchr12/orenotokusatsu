@@ -1,20 +1,20 @@
 import { useCallback, useState } from 'react';
-import { useApp, type TokuItem } from '../../context';
+import { type TokuItem, type UseAppMethods } from '../../context';
 import { SelectionModal } from './SelectionModal';
 import { SelectionGrid } from './SelectionGrid';
-import type { i18nProps, TranslateProps } from '../../dataHook';
+import type { TranslateProps } from '../../dataHook';
 
 type TitleSelectionListProps = {
-  i18n: i18nProps;
   translate: TranslateProps;
+  appState: UseAppMethods;
+  currentLanguage: string;
 };
 
 export const TitleSelectionList = ({
-  i18n,
   translate,
+  appState,
+  currentLanguage,
 }: TitleSelectionListProps) => {
-  const currentLanguage = i18n.language;
-
   const {
     selectedTokuWorks,
     handleRemoveWork,
@@ -23,9 +23,7 @@ export const TitleSelectionList = ({
     handleSearchTitle,
     searchTitle,
     searchedShows,
-  } = useApp({
-    currentLanguage,
-  });
+  } = appState;
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [activeSlot, setActiveSlot] = useState<number | undefined>(undefined);
