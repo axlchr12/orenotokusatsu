@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { TokuItem } from '../../context';
 import type { TranslateProps } from '../../dataHook';
 import { SearchForm } from '../../components';
@@ -30,15 +30,37 @@ export const SelectionModal = ({
   selectedTokuWorks,
   currentLanguage,
 }: SelectionModalProps) => {
-  if (!show) return null;
+  const [render, setRender] = useState(show);
+  const [isClosing, setIsClosing] = useState(false);
 
   const [alertInfo, setAlertInfo] = useState<{
     message: string;
   } | null>(null);
 
+  useEffect(() => {
+    if (show) {
+      setRender(true);
+      setIsClosing(false);
+    } else {
+      setIsClosing(true);
+      const timer = setTimeout(() => {
+        setRender(false);
+        setIsClosing(false);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [show]);
+
   const translatedTitle = useMemo(() => {
     return translate(title);
   }, []);
+
+  const _onClose = useCallback(() => {
+    if (typeof onClose === 'function') {
+      onClose();
+      setAlertInfo(null);
+    }
+  }, [onClose]);
 
   const _handleAddWork = useCallback(
     (newItem: TokuItem) => {
@@ -63,48 +85,59 @@ export const SelectionModal = ({
 
       if (typeof handleAddWork === 'function') {
         handleAddWork(newItem);
-        onClose();
+        _onClose();
       }
     },
-    [handleAddWork, selectedTokuWorks, onClose, currentLanguage],
+    [handleAddWork, selectedTokuWorks, _onClose, currentLanguage],
   );
 
+  if (!render) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div
-        className="fixed inset-0 bg-black/55 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-      />
+    <>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div
+          className={`fixed inset-0 bg-black/55 backdrop-blur-sm transition-opacity animate-fade-in ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+          onClick={_onClose}
+        />
 
-      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-xs sm:max-w-md transform transition-all overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-gray-800">
-            {translatedTitle}
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors text-2xl"
-          >
-            &times;
-          </button>
-        </div>
+        <div
+          className={`relative bg-white rounded-xl shadow-xl w-full max-w-xs sm:max-w-md transform transition-all overflow-hidden ${isClosing ? 'animate-modal-out' : 'animate-modal-in'}`}
+        >
+          <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-gray-800">
+              {translatedTitle}
+            </h3>
+            <button
+              onClick={_onClose}
+              className="text-gray-400 hover:text-gray-600 transition-colors text-2xl"
+            >
+              &times;
+            </button>
+          </div>
 
-        <div className="px-6 py-4">
-          <SearchForm handleSearch={handleSearchTitle} translate={translate} />
-          {alertInfo && (
-            <DuplicateErrorAlert
-              message={alertInfo.message}
-              onClose={() => setAlertInfo(null)}
+          <div className="px-6 py-4">
+            <SearchForm
+              handleSearch={handleSearchTitle}
+              translate={translate}
             />
-          )}
-          <SelectionShowList
-            searchedShows={searchedShows}
-            handleAddWork={_handleAddWork}
-            translate={translate}
-            searchTitle={searchTitle}
-          />
+            <SelectionShowList
+              searchedShows={searchedShows}
+              handleAddWork={_handleAddWork}
+              translate={translate}
+              searchTitle={searchTitle}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <>
+        {alertInfo && (
+          <DuplicateErrorAlert
+            message={alertInfo.message}
+            onClose={() => setAlertInfo(null)}
+          />
+        )}
+      </>
+    </>
   );
 };

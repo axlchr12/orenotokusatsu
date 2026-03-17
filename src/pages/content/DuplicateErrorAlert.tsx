@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 type DuplicateErrorAlertProps = {
   message: string;
@@ -9,13 +9,24 @@ export const DuplicateErrorAlert = ({
   message,
   onClose,
 }: DuplicateErrorAlertProps) => {
+  const [isExiting, setIsExiting] = useState(false);
+
+  const handleClose = () => {
+    setIsExiting(true);
+    setTimeout(onClose, 300);
+  };
+
   useEffect(() => {
-    const timer = setTimeout(onClose, 2000);
+    const timer = setTimeout(handleClose, 3000);
     return () => clearTimeout(timer);
-  }, [onClose]);
+  }, []);
 
   return (
-    <div className="fixed top-5 left-1/2 -translate-x-1/2 p-3 sm:p-0 z-full w-full max-w-sm duration-300">
+    <div
+      className={`fixed top-32 left-1/2 -translate-x-1/2 p-3 sm:p-0 w-[90%] max-w-sm duration-300 z-50 ${
+        isExiting ? 'animate-fade-out' : 'animate-fade-in'
+      }`}
+    >
       <div className="flex items-center p-4 border rounded-xl shadow-xl transition-shadow bg-red-50 border-red-200 text-red-800">
         <div className="flex-1 text-xs sm:text-sm font-medium">{message}</div>
         <button
