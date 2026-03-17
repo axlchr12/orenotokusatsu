@@ -1,32 +1,77 @@
-import { UseApp } from '../../context';
+import { useCallback, useState } from 'react';
+import { useApp, type TokuItem } from '../../context';
+import { SelectionModal } from './SelectionModal';
+import { SelectionGrid } from './SelectionGrid';
+import type { i18nProps, TranslateProps } from '../../dataHook';
 
-export const TitleSelectionList = () => {
-  const {} = UseApp();
+type TitleSelectionListProps = {
+  i18n: i18nProps;
+  translate: TranslateProps;
+};
+
+export const TitleSelectionList = ({
+  i18n,
+  translate,
+}: TitleSelectionListProps) => {
+  const currentLanguage = i18n.language;
+
+  const {
+    selectedTokuWorks,
+    handleRemoveWork,
+    handleAddWork,
+    resetSearch,
+    handleSearchTitle,
+    searchTitle,
+    searchedShows,
+  } = useApp({
+    currentLanguage,
+  });
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [activeSlot, setActiveSlot] = useState<number | undefined>(undefined);
+
+  const onOpenModal = (index: number) => {
+    setShowModal(true);
+    setActiveSlot(index);
+  };
+
+  const onCloseModal = () => {
+    setActiveSlot(undefined);
+    setShowModal(false);
+    resetSearch();
+  };
+
+  const _handleAddWork = useCallback(
+    (newItem: TokuItem) => {
+      if (typeof handleAddWork === 'function') {
+        handleAddWork(newItem, activeSlot!);
+      }
+      return undefined;
+    },
+    [handleAddWork, activeSlot],
+  );
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4">
-      <div className="grid grid-cols-4 md:grid-cols-4 gap-4">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <div
-            key={index}
-            className="relative flex flex-col items-center justify-center aspect-square border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-all shadow-sky-500 shadow-xs"
-          >
-            <span className="absolute top-2 left-3 text-sm font-bold text-black z-10">
-              {index + 1}
-            </span>
-
-            <div className="text-black text-4xl font-light group-hover:text-blue-400 transition-colors">
-              +
-            </div>
-
-            {/* Overlay image */}
-            {/* <img
-              className="absolute inset-0 w-full h-full object-cover rounded-2xl"
-              src="https://pbs.twimg.com/media/HDg8hslaoAAwf41?format=jpg&name=small"
-            /> */}
-          </div>
-        ))}
-      </div>
-    </div>
+    <>
+      <SelectionGrid
+        selectedTokuWorks={selectedTokuWorks}
+        handleRemoveWork={handleRemoveWork}
+        onOpenModal={onOpenModal}
+        translate={translate}
+        currentLanguage={currentLanguage}
+      />
+      <SelectionModal
+        show={showModal}
+        onClose={onCloseModal}
+        title="titleModal"
+        handleAddWork={_handleAddWork}
+        handleSearchTitle={handleSearchTitle}
+        searchedShows={searchedShows}
+        translate={translate}
+        searchTitle={searchTitle}
+        selectedTokuWorks={selectedTokuWorks}
+        currentLanguage={currentLanguage}
+      />
+    </>
   );
 };

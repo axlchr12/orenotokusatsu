@@ -1,9 +1,11 @@
-import { useTranslation } from 'react-i18next';
 import { Button } from './Button';
+import type { i18nProps } from '../../dataHook';
 
-export const ChangeLanguageButton = () => {
-  const { i18n } = useTranslation();
+type ChangeLanguageButtonProps = {
+  i18n: i18nProps;
+};
 
+export const ChangeLanguageButton = ({ i18n }: ChangeLanguageButtonProps) => {
   const currentLanguage = i18n.language;
 
   const changeLanguage = (lang: string) => {

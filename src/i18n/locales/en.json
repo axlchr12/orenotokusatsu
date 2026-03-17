@@ -1,4 +1,12 @@
 {
-  "title": "My <0>Tokusatsu</0> Rank",
-  "description": "Pick your favorite Tokusatsu works and share it to your social media!"
+  "title": "My <0>Tokusatsu</0>",
+  "description": "Pick your favorite Tokusatsu works and share it to your social media!",
+  "titleModal": "Search works",
+  "addItem": "Add",
+  "search": "Search",
+  "searchPlaceholder": "Search here... (e.g. Kamen Rider Zeztz)",
+  "searchResults": "Search results for \"{{query}}\"",
+  "dataNotFound": "Data not found!",
+  "onLoadingData": "Loading data...",
+  "duplicateEntries": "\"{{title}}\" is already in the list!"
 }

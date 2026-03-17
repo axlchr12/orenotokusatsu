@@ -1,4 +1,12 @@
 {
-  "title": "俺の<0>特撮</0>ランク",
-  "description": "好きな特撮作品を選んで、そしてSNSでシェアしよう!"
+  "title": "俺の<0>特撮</0>",
+  "description": "好きな特撮作品を選んで、そしてSNSでシェアしよう!",
+  "titleModal": "作品を検索",
+  "addItem": "追加する",
+  "search": "検索",
+  "searchPlaceholder": "ここで探索... (例えば仮面ライダーゼッツ)",
+  "searchResults": "検索結果 「{{query}}」",
+  "dataNotFound": "データが見つかりません!",
+  "onLoadingData": "データローディング中...",
+  "duplicateEntries": "「{{title}}」 は既にリストに存在します！"
 }

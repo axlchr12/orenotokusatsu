@@ -1,4 +1,12 @@
 {
-  "title": "Peringkat <0>Tokusatsu</0>Ku",
-  "description": "Pilih karya Tokusatsu favoritmu dan share ke sosmedmu!"
+  "title": "<0>Tokusatsu</0>Ku",
+  "description": "Pilih karya Tokusatsu favoritmu dan share ke sosmedmu!",
+  "titleModal": "Cari karya",
+  "addItem": "Tambahkan",
+  "search": "Cari",
+  "searchPlaceholder": "Cari di sini... (misal: Kamen Rider Zeztz)",
+  "searchResults": "Hasil pencarian untuk \"{{query}}\"",
+  "dataNotFound": "Data tidak ditemukan!",
+  "onLoadingData": "Sedang memuat data...",
+  "duplicateEntries": "\"{{title}}\" sudah ada di daftar!"
 }

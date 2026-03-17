@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
     "classnames": "^2.5.1",
     "i18next": "^25.8.18",
     "i18next-browser-languagedetector": "^8.2.1",
