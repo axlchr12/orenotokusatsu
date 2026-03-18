@@ -51,7 +51,7 @@ export const SelectionShowList = ({
             </div>
 
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-600">
+              <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-600 leading-tight">
                 [{show.type}-{show.year}]&nbsp;{show.title}
               </h4>
 

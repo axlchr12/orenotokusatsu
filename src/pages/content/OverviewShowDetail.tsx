@@ -14,7 +14,7 @@ export const OverviewShowDetail = ({
       {!!tokuShow && (
         <div
           key={tokuShow.id}
-          className="flex flex-col sm:flex-row items-center flex-wrap gap-3 p-2  rounded-xl transition-all mb-1 group"
+          className="flex flex-col sm:flex-row items-center flex-wrap gap-3 p-2 rounded-xl transition-all mb-1 group"
         >
           <div className="w-48 h-full bg-gray-200 rounded-xl border border-gray-100">
             <img
@@ -26,7 +26,7 @@ export const OverviewShowDetail = ({
           </div>
 
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-bold text-gray-800">
+            <h4 className="text-sm font-bold text-gray-800 leading-tight">
               [{tokuShow.type}-{tokuShow.year}]&nbsp;{tokuShow.title}
             </h4>
 
