@@ -66,7 +66,7 @@ export const ExportGrid = ({
           quality: 0.95,
           backgroundColor: '#eaefef',
           cacheBust: true,
-          pixelRatio: 2,
+          pixelRatio: 3,
           style: {
             filter: 'none',
             boxShadow: 'none',
@@ -79,10 +79,9 @@ export const ExportGrid = ({
           quality: 0.95,
           backgroundColor: '#eaefef',
           cacheBust: false,
+          pixelRatio: 3,
           style: {
-            filter: isMobile
-              ? 'none'
-              : 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
+            filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
           },
           filter: node => {
             const exclusionClasses = ['no-export'];
