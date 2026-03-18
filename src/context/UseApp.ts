@@ -35,7 +35,7 @@ type UseAppProps = {
 export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
   const [selectedTokuTitles, setSelectedTokuTitles] = useState<
     (TokuItem | null)[]
-  >(Array(12).fill(null));
+  >(Array(3).fill(null));
   const [searchTitle, setSearchTitle] = useState<string>('');
 
   const {
