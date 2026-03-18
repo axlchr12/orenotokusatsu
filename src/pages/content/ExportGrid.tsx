@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState, type RefObject } from 'react';
 import type { TranslateProps } from '../../dataHook';
-import { toJpeg } from 'html-to-image';
+import { toCanvas, toJpeg } from 'html-to-image';
 import type { TokuItem } from '../../context';
 import classNames from 'classnames';
 import { toBase64 } from '../../utils';
@@ -44,8 +44,7 @@ export const ExportGrid = ({
 
         if (img.src && !img.src.startsWith('data:')) {
           try {
-            const cleanUrl = `${img.src}${img.src.includes('?') ? '&' : '?'}t=${new Date().getTime()}`;
-            const base64 = await toBase64(cleanUrl);
+            const base64 = await toBase64(img.src);
             img.src = base64;
           } catch (e) {
             throw new Error(
@@ -60,20 +59,37 @@ export const ExportGrid = ({
 
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      const dataUrl = await toJpeg(contentRef.current!, {
-        quality: 0.95,
-        backgroundColor: '#eaefef',
-        cacheBust: false,
-        style: {
-          filter: isMobile
-            ? 'none'
-            : 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
-        },
-        filter: node => {
-          const exclusionClasses = ['no-export'];
-          return !exclusionClasses.some(cls => node.classList?.contains(cls));
-        },
-      });
+      let dataUrl;
+
+      if (isMobile) {
+        const canvas = await toCanvas(contentRef.current!, {
+          quality: 0.95,
+          backgroundColor: '#eaefef',
+          cacheBust: true,
+          pixelRatio: 2,
+          style: {
+            filter: 'none',
+            boxShadow: 'none',
+            textShadow: 'none',
+          },
+        });
+        dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+      } else {
+        dataUrl = await toJpeg(contentRef.current!, {
+          quality: 0.95,
+          backgroundColor: '#eaefef',
+          cacheBust: false,
+          style: {
+            filter: isMobile
+              ? 'none'
+              : 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
+          },
+          filter: node => {
+            const exclusionClasses = ['no-export'];
+            return !exclusionClasses.some(cls => node.classList?.contains(cls));
+          },
+        });
+      }
 
       images?.forEach((img, index) => {
         if (originalSrcs[index]) {
