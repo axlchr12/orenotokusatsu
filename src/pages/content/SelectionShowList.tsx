@@ -62,7 +62,7 @@ export const SelectionShowList = React.memo(
                 </h4>
 
                 <p className="text-[11px] text-gray-400 italic leading-relaxed transition-colors duration-200 group-hover:text-sky-600">
-                  [{show.type}-{show.year}]&nbsp;{show.titleJapanese}
+                  {show.titleJapanese}
                 </p>
               </div>
               <div className="min-w-0">

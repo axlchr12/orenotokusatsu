@@ -32,7 +32,6 @@ export const OverviewShowDetail = ({
             </h4>
 
             <p className="text-[11px] text-gray-400 italic leading-relaxed">
-              [{tokuTitle.type}-{tokuTitle.year}]&nbsp;
               {tokuTitle.titleJapanese}
             </p>
 
