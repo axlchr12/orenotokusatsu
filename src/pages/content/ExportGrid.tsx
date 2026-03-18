@@ -82,7 +82,7 @@ export const ExportGrid = ({
             filter: 'none !important',
           },
         });
-        dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+        dataUrl = canvas.toDataURL('image/jpeg', 0.75);
       } else {
         dataUrl = await toJpeg(contentRef.current!, {
           quality: 0.75,
