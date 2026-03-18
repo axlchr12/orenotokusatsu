@@ -46,7 +46,7 @@ export const Content = () => {
         <ExportGrid
           translate={translate}
           contentRef={contentRef}
-          selectedWorks={appState?.selectedTokuWorks}
+          selectedWorks={appState?.selectedselectedTokuTitles}
         />
       </div>
     </>

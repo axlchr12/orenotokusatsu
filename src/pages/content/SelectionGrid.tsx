@@ -4,7 +4,7 @@ import type { TranslateProps } from '../../dataHook';
 import { OverviewShowModal } from './OverviewShowModal';
 
 type SelectionGridProps = {
-  selectedTokuWorks: (TokuItem | null)[];
+  selectedselectedTokuTitles: (TokuItem | null)[];
   handleRemoveWork: (index: number) => void;
   onOpenModal: (index: number) => void;
   translate: TranslateProps;
@@ -12,7 +12,7 @@ type SelectionGridProps = {
 };
 
 export const SelectionGrid = ({
-  selectedTokuWorks,
+  selectedselectedTokuTitles,
   handleRemoveWork,
   onOpenModal,
   translate,
@@ -34,7 +34,7 @@ export const SelectionGrid = ({
     <>
       <div className="w-full max-w-3xl mx-auto p-3">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {selectedTokuWorks.map((item, index) => (
+          {selectedselectedTokuTitles.map((item, index) => (
             <div
               key={item?.id || index}
               className="relative flex flex-col items-center justify-center aspect-square border border-gray-100 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all shadow-xl overflow-hidden backdrop-blur-sm"
@@ -87,7 +87,7 @@ export const SelectionGrid = ({
       <OverviewShowModal
         activeSlot={activeSlot}
         onClose={onCloseOverviewModal}
-        selectedTokuWorks={selectedTokuWorks}
+        selectedselectedTokuTitles={selectedselectedTokuTitles}
         show={showOverviewModal}
         title="overviewShowModalTitle"
         translate={translate}

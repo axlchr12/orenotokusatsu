@@ -2,7 +2,7 @@ import type { TokuItem } from '../../context';
 import type { TranslateProps } from '../../dataHook';
 
 type SelectionShowListProps = {
-  searchedShows: TokuItem[] | undefined;
+  searchedTitles: TokuItem[] | undefined;
   handleAddWork: (newItem: TokuItem) => void;
   translate: TranslateProps;
   searchTitle: string;
@@ -10,7 +10,7 @@ type SelectionShowListProps = {
 };
 
 export const SelectionShowList = ({
-  searchedShows,
+  searchedTitles,
   handleAddWork,
   translate,
   searchTitle,
@@ -32,8 +32,8 @@ export const SelectionShowList = ({
         </div>
       )}
 
-      {!isListLoading && (searchedShows || [])?.length > 0 ? (
-        searchedShows?.map((show, index: number) => (
+      {!isListLoading && (searchedTitles || [])?.length > 0 ? (
+        searchedTitles?.map((show, index: number) => (
           <div
             key={show?.id || index}
             className="flex items-center gap-3 p-2 hover:bg-gray-200 rounded-xl cursor-pointer transition-all mb-1 group active:scale-75"
@@ -69,7 +69,7 @@ export const SelectionShowList = ({
         ))
       ) : !isListLoading &&
         searchTitle &&
-        (searchedShows || [])?.length === 0 ? (
+        (searchedTitles || [])?.length === 0 ? (
         <div className="text-center py-2 font-bold text-gray-400 text-sm">
           {translate('dataNotFound')}
         </div>

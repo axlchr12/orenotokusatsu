@@ -15,8 +15,8 @@ createRoot(document.getElementById('root')!).render(
       isListLoading={false}
       resetSearch={() => {}}
       searchTitle=""
-      selectedTokuWorks={[]}
-      setSelectedTokuWorks={() => {}}
+      selectedselectedTokuTitles={[]}
+      setSelectedselectedTokuTitles={() => {}}
     >
       <App />
     </AppProvider>

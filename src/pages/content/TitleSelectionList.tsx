@@ -16,13 +16,13 @@ export const TitleSelectionList = ({
   currentLanguage,
 }: TitleSelectionListProps) => {
   const {
-    selectedTokuWorks,
+    selectedselectedTokuTitles,
     handleRemoveWork,
     handleAddWork,
     resetSearch,
     handleSearchTitle,
     searchTitle,
-    searchedShows,
+    searchedTitles,
     isListLoading,
   } = appState;
 
@@ -53,7 +53,7 @@ export const TitleSelectionList = ({
   return (
     <>
       <SelectionGrid
-        selectedTokuWorks={selectedTokuWorks}
+        selectedselectedTokuTitles={selectedselectedTokuTitles}
         handleRemoveWork={handleRemoveWork}
         onOpenModal={onOpenModal}
         translate={translate}
@@ -65,10 +65,10 @@ export const TitleSelectionList = ({
         title="titleModal"
         handleAddWork={_handleAddWork}
         handleSearchTitle={handleSearchTitle}
-        searchedShows={searchedShows}
+        searchedTitles={searchedTitles}
         translate={translate}
         searchTitle={searchTitle}
-        selectedTokuWorks={selectedTokuWorks}
+        selectedselectedTokuTitles={selectedselectedTokuTitles}
         currentLanguage={currentLanguage}
         isListLoading={isListLoading}
       />

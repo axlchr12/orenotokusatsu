@@ -11,10 +11,10 @@ type SelectionModalProps = {
   title: string;
   handleSearchTitle: (title: string) => void;
   handleAddWork: (newItem: TokuItem) => void;
-  searchedShows: TokuItem[] | undefined;
+  searchedTitles: TokuItem[] | undefined;
   translate: TranslateProps;
   searchTitle: string;
-  selectedTokuWorks: (TokuItem | null)[];
+  selectedselectedTokuTitles: (TokuItem | null)[];
   currentLanguage: string;
   isListLoading: boolean;
 };
@@ -25,10 +25,10 @@ export const SelectionModal = ({
   title,
   handleSearchTitle,
   handleAddWork,
-  searchedShows,
+  searchedTitles,
   translate,
   searchTitle,
-  selectedTokuWorks,
+  selectedselectedTokuTitles,
   currentLanguage,
   isListLoading,
 }: SelectionModalProps) => {
@@ -45,7 +45,7 @@ export const SelectionModal = ({
 
   const _handleAddWork = useCallback(
     (newItem: TokuItem) => {
-      const isDuplicate = selectedTokuWorks.some(
+      const isDuplicate = selectedselectedTokuTitles.some(
         work => work !== null && work.id === newItem.id,
       );
 
@@ -66,7 +66,7 @@ export const SelectionModal = ({
         _onClose();
       }
     },
-    [handleAddWork, selectedTokuWorks, _onClose, currentLanguage],
+    [handleAddWork, selectedselectedTokuTitles, _onClose, currentLanguage],
   );
 
   return (
@@ -74,7 +74,7 @@ export const SelectionModal = ({
       <Modal onClose={_onClose} show={show} title={title} translate={translate}>
         <SearchForm handleSearch={handleSearchTitle} translate={translate} />
         <SelectionShowList
-          searchedShows={searchedShows}
+          searchedTitles={searchedTitles}
           handleAddWork={_handleAddWork}
           translate={translate}
           searchTitle={searchTitle}

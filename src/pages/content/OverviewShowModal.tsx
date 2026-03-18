@@ -9,7 +9,7 @@ type OverviewShowModalProps = {
   onClose: () => void;
   title: string;
   translate: TranslateProps;
-  selectedTokuWorks: (TokuItem | null)[];
+  selectedselectedTokuTitles: (TokuItem | null)[];
   activeSlot: number | undefined;
   currentLanguage: string;
 };
@@ -19,7 +19,7 @@ export const OverviewShowModal = ({
   onClose,
   title,
   translate,
-  selectedTokuWorks,
+  selectedselectedTokuTitles,
   activeSlot,
   currentLanguage,
 }: OverviewShowModalProps) => {
@@ -30,12 +30,12 @@ export const OverviewShowModal = ({
   }, [onClose]);
 
   const tokuShow = useMemo(() => {
-    if (typeof activeSlot === 'number' && selectedTokuWorks) {
-      return selectedTokuWorks[activeSlot];
+    if (typeof activeSlot === 'number' && selectedselectedTokuTitles) {
+      return selectedselectedTokuTitles[activeSlot];
     }
 
     return null;
-  }, [activeSlot, selectedTokuWorks]);
+  }, [activeSlot, selectedselectedTokuTitles]);
 
   return (
     <Modal onClose={_onClose} show={show} title={title} translate={translate}>
