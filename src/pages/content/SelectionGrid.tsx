@@ -35,14 +35,14 @@ export const SelectionGrid = React.memo(
     return (
       <>
         <div className="w-full max-w-xl mx-auto p-3">
-          <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-2">
             {selectedTokuTitles.map((item, index) => (
               <div
                 key={item?.id || index}
                 className="relative flex flex-col items-center justify-center aspect-square border border-gray-100 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all shadow-xl overflow-hidden backdrop-blur-sm duration-300"
                 onClick={() => !item && onOpenModal(index)}
               >
-                <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700/90 px-1 sm:px-2 sm:py-1 rounded-br-xl z-30 shadow-xl transition-shadow">
+                <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700/90 px-2 py-1 rounded-br-xl z-30 shadow-xl transition-shadow">
                   {index + 1}
                 </span>
                 {item ? (
@@ -52,11 +52,9 @@ export const SelectionGrid = React.memo(
                         e.stopPropagation();
                         handleRemoveWork(index);
                       }}
-                      className="absolute top-0 right-0 z-40 bg-red-500/90 hover:bg-red-600 text-white w-4 h-4 sm:w-7 sm:h-7 rounded-bl-xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-75 shadow-xl no-export cursor-pointer"
+                      className="absolute top-0 right-0 z-40 bg-red-500/90 hover:bg-red-600 text-white w-7 h-7 rounded-bl-xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-75 shadow-xl no-export cursor-pointer"
                     >
-                      <span className="text-xs sm:text-lg leading-none">
-                        &times;
-                      </span>
+                      <span className="text-lg leading-none">&times;</span>
                     </button>
                     <img
                       src={
