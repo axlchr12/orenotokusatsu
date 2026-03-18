@@ -33,7 +33,7 @@ export const DuplicateErrorAlert = ({
         },
       )}
     >
-      <div className="flex items-center p-4 border rounded-xl shadow transition-all bg-red-50 border-red-200 text-red-800">
+      <div className="flex items-center p-4 border rounded-xl shadow-md transition-all bg-red-50 border-red-200 text-red-800">
         <div className="flex-1 text-xs sm:text-sm font-medium">{message}</div>
         <button
           onClick={handleClose}
