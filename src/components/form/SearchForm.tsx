@@ -20,7 +20,7 @@ export const SearchForm = ({ handleSearch, translate }: SearchFormProps) => {
         <div className="relative flex-1">
           <input
             type="text"
-            className="block w-full px-4 py-2.5 border border-gray-300 rounded-l-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-sky-500 focus:z-10 transition-all duration-200 sm:text-sm"
+            className="block w-full px-4 py-2.5 border border-gray-300 rounded-l-xl bg-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-sky-500 focus:z-10 transition-all duration-200 sm:text-sm"
             placeholder={translate('searchPlaceholder')}
             autoFocus
             onChange={onChangeText}

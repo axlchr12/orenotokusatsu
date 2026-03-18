@@ -32,15 +32,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Auto Versioning
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          npm version patch -m "v%s [skip ci]" --force
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build Application
         env:
           VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
@@ -51,6 +42,15 @@ jobs:
         run: |
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           echo "build_num=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Auto Versioning
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          npm version patch -m "v%s [skip ci]" --force
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
