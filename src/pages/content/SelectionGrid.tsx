@@ -62,10 +62,9 @@ export const SelectionGrid = React.memo(
                           ? `${item.image}&lang=${currentLanguage}`
                           : 'https://placehold.co/150'
                       }
-                      // loading="lazy"
-                      loading="eager"
-                      decoding="sync"
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 will-change-transform"
                       alt={item.title}
                       referrerPolicy="no-referrer"
                       onClick={() => onOpenOverviewModal(index)}
