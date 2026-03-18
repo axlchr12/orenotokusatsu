@@ -52,4 +52,4 @@ jobs:
             --project-name=orenotokusatsu \
             --branch=main \
             --commit-hash=${{ steps.meta.outputs.sha_short }} \
-            --commit-message="v${{ steps.meta.outputs.build_num }} - ${{ github.event.head_commit.message }}"
+            --commit-message="Build v${{ steps.meta.outputs.build_num }} - ${{ github.event.head_commit.message }}"
