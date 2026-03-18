@@ -11,7 +11,7 @@ type ExportGridProps = {
   selectedWorks: (TokuItem | null)[];
 };
 
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+export const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export const ExportGrid = ({
   translate,

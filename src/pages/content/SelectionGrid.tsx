@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import type { TokuItem } from '../../context';
 import type { TranslateProps } from '../../dataHook';
 import { OverviewShowModal } from './OverviewShowModal';
+import { isMobile } from './ExportGrid';
 
 type SelectionGridProps = {
   selectedTokuTitles: (TokuItem | null)[];
@@ -62,7 +63,7 @@ export const SelectionGrid = React.memo(
                           ? `${item.image}&lang=${currentLanguage}`
                           : 'https://placehold.co/150'
                       }
-                      loading="lazy"
+                      loading={isMobile ? 'eager' : 'lazy'}
                       decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 will-change-transform"
                       alt={item.title}
