@@ -3,6 +3,7 @@ import type { TranslateProps } from '../../dataHook';
 import { toJpeg } from 'html-to-image';
 import type { TokuItem } from '../../context';
 import classNames from 'classnames';
+import { toBase64 } from '../../utils';
 
 type ExportGridProps = {
   translate: TranslateProps;
@@ -34,11 +35,32 @@ export const ExportGrid = ({
       throw new Error('Failed to share:', { cause: 'Element not found' });
     }
 
+    const images = contentRef.current?.querySelectorAll('img');
+    const originalSrcs: string[] = [];
+
     try {
-      const dataUrl = await toJpeg(contentRef?.current, {
+      const promises = Array.from(images || []).map(async (img, index) => {
+        originalSrcs[index] = img.src;
+
+        if (img.src && !img.src.startsWith('data:')) {
+          try {
+            const base64 = await toBase64(img.src);
+            img.src = base64;
+          } catch (e) {
+            throw new Error(
+              `Failed to change image to base64 for index-${index}`,
+              { cause: e },
+            );
+          }
+        }
+      });
+
+      await Promise.all(promises);
+
+      const dataUrl = await toJpeg(contentRef.current!, {
         quality: 0.95,
         backgroundColor: '#eaefef',
-        cacheBust: true,
+        cacheBust: false,
         style: {
           filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
         },
@@ -46,6 +68,12 @@ export const ExportGrid = ({
           const exclusionClasses = ['no-export'];
           return !exclusionClasses.some(cls => node.classList?.contains(cls));
         },
+      });
+
+      images?.forEach((img, index) => {
+        if (originalSrcs[index]) {
+          img.src = originalSrcs[index];
+        }
       });
 
       const blob = await (await fetch(dataUrl)).blob();

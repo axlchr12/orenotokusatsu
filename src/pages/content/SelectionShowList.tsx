@@ -47,6 +47,7 @@ export const SelectionShowList = ({
                 className="w-full h-full object-cover"
                 alt={show.title}
                 referrerPolicy="no-referrer"
+                crossOrigin="anonymous"
               />
             </div>
 

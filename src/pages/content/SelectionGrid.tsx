@@ -55,11 +55,18 @@ export const SelectionGrid = ({
                     <span className="text-lg font-bold">&times;</span>
                   </button>
                   <img
-                    src={item.image || 'https://placehold.co/150'}
+                    key={`${item.id}-${currentLanguage}`}
+                    src={
+                      item.image
+                        ? `${item.image}&t=${Date.now()}&lang=${currentLanguage}`
+                        : 'https://placehold.co/150'
+                    }
+                    loading="eager"
                     className="w-full h-full object-cover"
                     alt={item.title}
                     referrerPolicy="no-referrer"
                     onClick={() => onOpenOverviewModal(index)}
+                    crossOrigin="anonymous"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-black backdrop-blur-sm p-1.5 z-20">
                     <p className="text-white text-[9px] sm:text-[12px] font-medium leading-tight text-center">
