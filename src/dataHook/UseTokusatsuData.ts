@@ -43,7 +43,10 @@ const searchTokuMulti = async (query: string) => {
 
         return {
           id: item.id,
-          title: item.name || item.title,
+          title:
+            item.name === 'Masked Rider DCD'
+              ? 'Kamen Rider Decade'
+              : item.name || item.title,
           titleJapanese: item.original_name || item.original_title,
           year: date ? date.split('-')[0] : 'N/A',
           overview: item.overview || 'No overview.',
