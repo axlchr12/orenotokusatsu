@@ -34,7 +34,7 @@ export const SearchForm = ({ handleSearch, translate }: SearchFormProps) => {
 
         <button
           type="button"
-          className="px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold duration-200 rounded-r-xl border border-sky-600 transition-all shadow-md active:scale-75 focus:z-10 cursor-pointer"
+          className="px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold duration-200 rounded-r-xl border border-sky-600 transition-all shadow active:scale-75 focus:z-10 cursor-pointer"
           onClick={() => handleSearch(inputValue)}
         >
           {translate('search')}

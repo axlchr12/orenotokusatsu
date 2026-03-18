@@ -45,7 +45,7 @@ export const SelectionShowList = React.memo(
                 handleAddWork(show);
               }}
             >
-              <div className="w-16 sm:w-22 h-full bg-gray-200 rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+              <div className="w-16 sm:w-22 h-full bg-gray-200 rounded-xl overflow-hidden border border-gray-100 shadow">
                 <img
                   src={show.image || 'https://placehold.co/150'}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
