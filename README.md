@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# My Tokusatsu (俺の特撮)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**My Tokusatsu (俺の特撮)** is a modern React-based web application that allows fans to pick their top 12 favorite Tokusatsu titles, organize them into a curated list, and share the results on social media.
 
-Currently, two official plugins are available:
+The app is built with a global audience in mind, featuring full localization for **English**, **Indonesian**, and **Japanese**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+* **Top 12 Selection:** Curate a personalized grid of your favorite 12 Tokusatsu titles.
+* **Dynamic Search:** Real-time search functionality powered by **TheMovieDatabase (TMDB) API**.
+* **Multilingual Support (i18n):** Seamlessly switch between English, Indonesian, and Japanese.
+* **Image Generation:** Convert your list into a high-quality image using `html-to-image`.
+* **Responsive Design:** Built with Tailwind CSS 4.0 for a mobile-first experience.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+* **Framework:** [React 19](https://react.dev/) & [TypeScript](https://www.typescriptlang.org/)
+* **Build Tool:** [Vite 6](https://vitejs.dev/)
+* **Styling:** [Tailwind CSS 4.0](https://tailwindcss.com/)
+* **Data Fetching:** [TanStack Query v5](https://tanstack.com/query/latest)
+* **API:** [TMDB API](https://www.themoviedb.org/documentation/api)
+* **Localization:** [i18next](https://www.i18next.com/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Current Problem
+* **API Filtering Limitations:** TMDB lacks a specific "Tokusatsu" category or keyword filter in its search endpoint. Consequently, all filtering (Genre IDs, Original Language, and excluding Anime) must be handled **manually on the frontend**, which limits search precision.
+* **Localization Mismatch:** The `/search/multi` endpoint does not support fetching dual-language metadata (EN/JP) simultaneously.
+* **Double-Fetching Overhead:** The app currently performs an initial English search, then maps through the results to fetch specific Japanese details (`overviewJp`) via secondary API calls, impacting performance.
+* **Naming Inconsistencies:** Manual mapping is required for certain localized titles (e.g., "Masked Rider DCD" instead of "Kamen Rider Decade").
+* **Franchise Grouping Issues:** TMDB often groups distinct Tokusatsu titles into a single "Series" entry (e.g., the "Chouseishin Series" groups *Gransazer*, *Justirisers*, and *Sazer-X* into seasons). This prevents users from selecting individual shows as separate entries since the search endpoint only returns the parent series.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## TODO
+- [ ] Implement a caching layer and debouncing to minimize redundant API calls during the "Double-Fetch" process.
+- [ ] Add comprehensive comments to all components and implement unit tests to ensure stability.
+- [ ] Explore a logic to detect "Series" entries and allow users to pick specific seasons as standalone items in their Top 12 list.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Prerequisites
+* Node.js (Latest LTS)
+* TMDB API Key
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Installation
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/yourusername/orenotokusatsu.git](https://github.com/yourusername/orenotokusatsu.git)
+    cd orenotokusatsu
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3.  **Environment Variables:**
+    Create a `.env` file and add your TMDB API Key:
+    ```env
+    VITE_TMDB_API_KEY=your_api_key_here
+    ```
+
+4.  **Run development server:**
+    ```bash
+    npm run dev
+    ```
+
+## License
+This project is private. Data provided by TMDB API.
