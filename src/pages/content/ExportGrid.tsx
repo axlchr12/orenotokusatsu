@@ -134,9 +134,9 @@ export const ExportGrid = ({
         link.click();
         document.body.removeChild(link);
       }
-    } catch (err) {
+    } catch (error) {
       setIsExporting(false);
-      throw new Error('Failed to share:', { cause: err });
+      throw new Error('Failed to share:', { cause: error });
     } finally {
       setIsExporting(false);
     }
