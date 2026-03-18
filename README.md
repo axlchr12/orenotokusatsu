@@ -1,4 +1,8 @@
 # My Tokusatsu (俺の特撮)
+[![Author](https://img.shields.io/badge/author-axlchr12-blue.svg)](https://github.com/axlchr12)
+[![Source code](https://img.shields.io/badge/source-orenotokusatsu-blue.svg)](https://github.com/axlchr12/orenotokusatsu)
+[![Software license](https://img.shields.io/github/license/axlchr12/orenotokusatsu.svg)](https://opensource.org/licenses/MIT)
+[![Deployment Status](https://github.com/axlchr12/orenotokusatsu/actions/workflows/deploy.yml/badge.svg)](https://github.com/axlchr12/orenotokusatsu/actions)
 
 **My Tokusatsu (俺の特撮)** is a modern React-based web application that allows fans to pick their top 12 favorite Tokusatsu titles, organize them into a curated list, and share the results on social media.
 
