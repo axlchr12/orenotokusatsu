@@ -64,7 +64,8 @@ export const ExportGrid = ({
       if (isMobile) {
         const element = contentRef.current!;
         const canvas = await toCanvas(element, {
-          quality: 0.95,
+          quality: 0.75,
+          pixelRatio: 2,
           backgroundColor: '#eaefef',
           cacheBust: true,
           width: element.offsetWidth * 3,
@@ -80,16 +81,14 @@ export const ExportGrid = ({
             boxShadow: '0px 0px 0px rgba(0,0,0,0) !important',
             filter: 'none !important',
           },
-
-          pixelRatio: 3,
         });
         dataUrl = canvas.toDataURL('image/jpeg', 0.95);
       } else {
         dataUrl = await toJpeg(contentRef.current!, {
-          quality: 0.95,
+          quality: 0.75,
           backgroundColor: '#eaefef',
           cacheBust: false,
-          pixelRatio: 3,
+          pixelRatio: 2,
           style: {
             filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
           },
