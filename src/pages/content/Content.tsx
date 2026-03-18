@@ -19,7 +19,7 @@ export const Content = () => {
     <>
       <section id="mainContent" ref={contentRef}>
         <div id="heading">
-          <h1 className="mb-1.5 text-2xl sm:text-4xl tracking-wide text-amber-700 ">
+          <h1 className="pt-10 pb-2 text-2xl sm:text-4xl tracking-wide text-amber-700 ">
             <Trans
               i18nKey="title"
               components={[
@@ -38,13 +38,13 @@ export const Content = () => {
           appState={appState}
           currentLanguage={currentLanguage}
         />
-        <div className="watermark-only mt-4 text-center">
+        <div className="watermark-only text-center">
           <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold font-mono opacity-80">
             {translate('watermark', { appName, appVersion })}
           </span>
         </div>
       </section>
-      <div id="exportGrid" className="flex justify-center mb-3">
+      <div id="exportGrid" className="flex justify-center mt-5">
         <ExportGrid
           translate={translate}
           contentRef={contentRef}
