@@ -62,16 +62,26 @@ export const ExportGrid = ({
       let dataUrl;
 
       if (isMobile) {
-        const canvas = await toCanvas(contentRef.current!, {
+        const element = contentRef.current!;
+        const canvas = await toCanvas(element, {
           quality: 0.95,
           backgroundColor: '#eaefef',
           cacheBust: true,
-          pixelRatio: 3,
+          width: element.offsetWidth * 3,
+          height: element.offsetHeight * 3,
+          canvasWidth: element.offsetWidth * 3,
+          canvasHeight: element.offsetHeight * 3,
           style: {
+            transform: 'scale(3)',
+            transformOrigin: 'top left',
+            width: element.offsetWidth + 'px',
+            height: element.offsetHeight + 'px',
             filter: 'none',
             boxShadow: 'none',
-            textShadow: 'none',
+            borderRadius: '0',
           },
+
+          pixelRatio: 3,
         });
         dataUrl = canvas.toDataURL('image/jpeg', 0.95);
       } else {

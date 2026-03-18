@@ -38,8 +38,10 @@ export const Content = () => {
           appState={appState}
           currentLanguage={currentLanguage}
         />
-        <div className="watermark-only text-xs text-gray-300 font-mono">
-          {translate('watermark', { appName, appVersion })}
+        <div className="watermark-only mt-4 text-center">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold font-mono opacity-80">
+            {translate('watermark', { appName, appVersion })}
+          </span>
         </div>
       </section>
       <div id="exportGrid" className="flex justify-center mb-3">
