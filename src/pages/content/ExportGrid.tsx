@@ -95,13 +95,9 @@ export const ExportGrid = ({
       )}
     >
       {isExporting ? (
-        <>
-          <span className="animate-pulse">{translate('shareOnProcess')}</span>
-        </>
+        <span className="animate-pulse">{translate('shareOnProcess')}</span>
       ) : (
-        <>
-          <span>{translate('share')}</span>
-        </>
+        <span>{translate('share')}</span>
       )}
     </button>
   );
