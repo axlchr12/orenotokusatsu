@@ -81,6 +81,10 @@ export const ExportGrid = ({
             boxShadow: '0px 0px 0px rgba(0,0,0,0) !important',
             filter: 'none !important',
           },
+          filter: node => {
+            const exclusionClasses = ['no-export'];
+            return !exclusionClasses.some(cls => node.classList?.contains(cls));
+          },
         });
         dataUrl = canvas.toDataURL('image/jpeg', 0.75);
       } else {
