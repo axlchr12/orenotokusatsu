@@ -47,7 +47,7 @@ const searchTokuMulti = async (query: string) => {
           overview: item.overview || 'No overview.',
           overviewJp: itemJP?.overview || '詳細なし',
           image: item.poster_path
-            ? `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500${item.poster_path}`
+            ? `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w342${item.poster_path}&we&q=70&il`
             : null,
           type: item.media_type,
           rating: item.vote_average ? item.vote_average.toFixed(1) : '0',
