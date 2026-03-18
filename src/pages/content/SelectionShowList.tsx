@@ -55,7 +55,7 @@ export const SelectionShowList = ({
                 [{show.type}-{show.year}]&nbsp;{show.title}
               </h4>
 
-              <p className="text-[11px] text-gray-400 italic group-hover:text-sky-600">
+              <p className="text-[11px] text-gray-400 italic group-hover:text-sky-600 leading-tight">
                 [{show.type}-{show.year}]&nbsp;{show.titleJapanese}
               </p>
             </div>

@@ -29,12 +29,13 @@ export const OverviewShowDetail = ({
             <h4 className="text-sm font-bold text-gray-800">
               [{tokuShow.type}-{tokuShow.year}]&nbsp;{tokuShow.title}
             </h4>
-            <p className="text-[11px] text-gray-400 italic">
+
+            <p className="text-[11px] text-gray-400 italic leading-tight">
               [{tokuShow.type}-{tokuShow.year}]&nbsp;
               {tokuShow.titleJapanese}
             </p>
 
-            <p className="text-[15px] text-gray-700 italic">
+            <p className="text-[15px] pt-2 text-gray-700 italic">
               {currentLanguage === 'ja'
                 ? tokuShow.overviewJp
                 : tokuShow.overview}
