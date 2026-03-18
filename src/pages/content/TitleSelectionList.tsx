@@ -23,6 +23,7 @@ export const TitleSelectionList = ({
     handleSearchTitle,
     searchTitle,
     searchedShows,
+    isListLoading,
   } = appState;
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -69,6 +70,7 @@ export const TitleSelectionList = ({
         searchTitle={searchTitle}
         selectedTokuWorks={selectedTokuWorks}
         currentLanguage={currentLanguage}
+        isListLoading={isListLoading}
       />
     </>
   );

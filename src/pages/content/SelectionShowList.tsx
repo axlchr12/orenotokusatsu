@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import type { TokuItem } from '../../context';
 import type { TranslateProps } from '../../dataHook';
 
@@ -7,6 +6,7 @@ type SelectionShowListProps = {
   handleAddWork: (newItem: TokuItem) => void;
   translate: TranslateProps;
   searchTitle: string;
+  isListLoading: boolean;
 };
 
 export const SelectionShowList = ({
@@ -14,27 +14,8 @@ export const SelectionShowList = ({
   handleAddWork,
   translate,
   searchTitle,
+  isListLoading,
 }: SelectionShowListProps) => {
-  const [isSearching, setIsSearching] = useState(false);
-  const [delayedResults, setDelayedResults] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (searchTitle) {
-      setIsSearching(true);
-      setDelayedResults([]);
-
-      const timer = setTimeout(() => {
-        setDelayedResults(searchedShows || []);
-        setIsSearching(false);
-      }, 1500);
-
-      return () => clearTimeout(timer);
-    } else {
-      setDelayedResults([]);
-      setIsSearching(false);
-    }
-  }, [searchedShows, searchTitle]);
-
   return (
     <div className="max-h-87.5 overflow-y-auto">
       {searchTitle && (
@@ -43,7 +24,7 @@ export const SelectionShowList = ({
         </p>
       )}
 
-      {isSearching && (
+      {isListLoading && (
         <div className="py-2">
           <p className="text-sm font-medium animate-pulse text-gray-400">
             {translate('onLoadingData')}
@@ -51,8 +32,8 @@ export const SelectionShowList = ({
         </div>
       )}
 
-      {!isSearching && delayedResults.length > 0 ? (
-        delayedResults.map((show: any, index: number) => (
+      {!isListLoading && (searchedShows || [])?.length > 0 ? (
+        searchedShows?.map((show, index: number) => (
           <div
             key={show?.id || index}
             className="flex items-center gap-3 p-2 hover:bg-gray-200 rounded-xl cursor-pointer transition-all mb-1 group active:scale-75"
@@ -63,7 +44,7 @@ export const SelectionShowList = ({
             <div className="w-20 h-25 bg-gray-200 rounded-xl border border-gray-100">
               <img
                 src={show.image || 'https://placehold.co/150'}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 alt={show.title}
                 referrerPolicy="no-referrer"
               />
@@ -71,12 +52,12 @@ export const SelectionShowList = ({
 
             <div className="flex-1 min-w-0">
               <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-600 truncate sm:whitespace-normal">
-                {show.title}
+                [{show.type}-{show.year}]&nbsp;{show.title}
               </h4>
 
               {show?.titleJapanese && show?.titleJapanese !== show?.title && (
                 <p className="text-[11px] text-gray-500 italic truncate sm:whitespace-normal group-hover:text-sky-600">
-                  {show.titleJapanese}
+                  [{show.type}-{show.year}]&nbsp;{show.titleJapanese}
                 </p>
               )}
             </div>
@@ -88,7 +69,9 @@ export const SelectionShowList = ({
             </div>
           </div>
         ))
-      ) : !isSearching && searchTitle && delayedResults.length === 0 ? (
+      ) : !isListLoading &&
+        searchTitle &&
+        (searchedShows || [])?.length === 0 ? (
         <div className="text-center py-2 font-bold text-gray-400 text-sm">
           {translate('dataNotFound')}
         </div>

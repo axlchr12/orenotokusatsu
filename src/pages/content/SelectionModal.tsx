@@ -17,6 +17,7 @@ type SelectionModalProps = {
   searchTitle: string;
   selectedTokuWorks: (TokuItem | null)[];
   currentLanguage: string;
+  isListLoading: boolean;
 };
 
 export const SelectionModal = ({
@@ -30,6 +31,7 @@ export const SelectionModal = ({
   searchTitle,
   selectedTokuWorks,
   currentLanguage,
+  isListLoading,
 }: SelectionModalProps) => {
   const [render, setRender] = useState(show);
   const [isClosing, setIsClosing] = useState(false);
@@ -66,10 +68,7 @@ export const SelectionModal = ({
   const _handleAddWork = useCallback(
     (newItem: TokuItem) => {
       const isDuplicate = selectedTokuWorks.some(
-        work =>
-          work !== null &&
-          work.id === newItem.id &&
-          work.source === newItem.source,
+        work => work !== null && work.id === newItem.id,
       );
 
       if (isDuplicate) {
@@ -139,6 +138,7 @@ export const SelectionModal = ({
               handleAddWork={_handleAddWork}
               translate={translate}
               searchTitle={searchTitle}
+              isListLoading={isListLoading}
             />
           </div>
         </div>

@@ -2,11 +2,13 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTokusatsuData } from '../dataHook';
 
 export type TokuItem = {
-  id: string;
+  id: number;
+  image: string;
+  rating: string;
   title: string;
-  titleJapanese?: string;
-  image: string | null;
-  source?: string;
+  titleJapanese: string;
+  type: string;
+  year: string;
 };
 
 export type UseAppMethods = {
@@ -16,17 +18,16 @@ export type UseAppMethods = {
   >;
   handleAddWork: (newItem: TokuItem, index: number) => void;
   handleRemoveWork: (index: number) => void;
-  masterListToku: TokuItem[] | undefined;
-  isListLoading: boolean;
-  isListError: boolean;
   resetSearch: () => void;
   searchedShows?: TokuItem[] | undefined;
   handleSearchTitle: (title: string) => void;
   searchTitle: string;
+  isListLoading: boolean;
+  isListError: boolean;
 };
 
 type UseAppProps = {
-  currentLanguage: string;
+  currentLanguage?: string;
 };
 
 export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
@@ -39,7 +40,7 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
     data: masterListToku,
     isLoading: isListLoading,
     isError: isListError,
-  } = useTokusatsuData();
+  } = useTokusatsuData({ query: searchTitle });
 
   const resetSearch = useCallback(() => {
     setSearchTitle('');
@@ -69,11 +70,11 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
     if (!masterListToku || !searchTitle) return [];
 
     if (currentLanguage === 'ja')
-      return masterListToku?.filter(item =>
+      return masterListToku?.filter((item: any) =>
         item.titleJapanese?.includes(searchTitle),
       );
 
-    return masterListToku?.filter(item =>
+    return masterListToku?.filter((item: any) =>
       item.title.toLowerCase().includes(searchTitle.toLowerCase()),
     );
   }, [masterListToku, currentLanguage, searchTitle]);
@@ -83,7 +84,6 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
     setSelectedTokuWorks,
     handleAddWork,
     handleRemoveWork,
-    masterListToku,
     isListError,
     isListLoading,
     resetSearch,

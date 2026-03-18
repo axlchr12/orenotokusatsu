@@ -1,91 +1,64 @@
-import { useQueries } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-const parseJapaneseTitle = (content: string, fallback: string) => {
-  const nihongoMatch = content.match(
-    /\{\{nihongo\|((?:[^{}]|\{\{[^{}]*\}\})*)\}\}/i,
-  );
-  if (!nihongoMatch) return fallback;
+const TMDB_TOKEN = import.meta.env.VITE_TMDB_API_KEY;
+const BASE_URL = 'https://api.themoviedb.org/3';
 
-  let raw = nihongoMatch[1];
-  raw = raw.replace(/\{\{[Rr]uby\|([^|{}]+)\|[^|{}]+\}\}/g, '$1');
+const searchTokuMulti = async (query: string) => {
+  if (!query) return [];
 
-  const parts = raw.split('|');
-  const target = parts[1] || '';
-
-  return (
-    target
-      .replace(/['\[\]{}|]/g, '')
-      .replace(/<br.*?>/gi, '')
-      .normalize('NFKC')
-      .trim() || fallback
-  );
-};
-
-const fetchFandomToku = async (domain: string, category: string) => {
-  const url = `https://${domain}.fandom.com/api.php?action=query&generator=categorymembers&gcmtitle=Category:${category}&gcmlimit=200&prop=pageimages|revisions&piprop=thumbnail&pithumbsize=600&cllimit=max&rvprop=content&rvslots=main&rvsection=0&format=json&origin=*`;
+  const url = `${BASE_URL}/search/multi?query=${encodeURIComponent(query)}&include_adult=true&language=en-US&page=1`;
 
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    if (!data.query) return [];
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${TMDB_TOKEN}`,
+      },
+    });
 
-    return Object.values(data.query.pages)
-      .filter(
-        (data: any) => data?.thumbnail && !data?.title?.includes('Category'),
-      )
-      .map((page: any) => {
+    if (!response.ok) throw new Error('Failed to fetch TMDb');
+    const data = await response.json();
+    return (data.results || [])
+      .filter((item: any) => {
+        const isMedia = item.media_type === 'tv' || item.media_type === 'movie';
+        const isJapan = item.original_language === 'ja';
+        const hasTokuVibe = item.genre_ids?.some((id: number) =>
+          [10765, 878, 14].includes(id),
+        );
+        const isNotAnime = !item.genre_ids?.includes(16);
+        return isMedia && isJapan && hasTokuVibe && isNotAnime;
+      })
+      .map((item: any) => {
+        const date = item.first_air_date || item.release_date || '';
         return {
-          id: page.pageid,
-          title: page.title,
-          titleJapanese: parseJapaneseTitle(
-            page.revisions?.[0]?.slots?.main?.['*'] || '',
-            page.title,
-          ),
-          image: page.thumbnail?.source
-            ? page.thumbnail.source.split('/revision')[0]
+          id: item.id,
+          title: item.name || item.title,
+          titleJapanese: item.original_name || item.original_title,
+          year: date ? date.split('-')[0] : 'N/A',
+          overview: item.overview,
+          image: item.poster_path
+            ? `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500${item.poster_path}`
             : null,
-          source: page.title.toLowerCase().includes('sentai')
-            ? `${domain}-sentai`
-            : domain,
+          type: item.media_type,
+          rating: item.vote_average ? item.vote_average.toFixed(1) : '0',
         };
       });
   } catch (error) {
-    console.error(`Error fetching ${domain}:`, error);
+    console.error('Search error:', error);
     return [];
   }
 };
 
-export const useTokusatsuData = () => {
-  const configs = [
-    { domain: 'kamenrider', cat: 'Series' },
-    { domain: 'powerrangers', cat: 'Sentai_Season' },
-    { domain: 'powerrangers', cat: 'Season' },
-    { domain: 'ultraseries', cat: 'Series' },
-    { domain: 'tokusatsu', cat: 'Shows' },
-    { domain: 'project-red', cat: 'Series' },
-    { domain: 'metalheroes', cat: 'Series' },
-  ];
+interface UseTokusatsuDataProps {
+  query: string;
+}
 
-  const queryResults = useQueries({
-    queries: configs.map(conf => ({
-      queryKey: ['toku', conf.domain, conf.cat],
-      queryFn: () => fetchFandomToku(conf.domain, conf.cat),
-      staleTime: 1000 * 60 * 60,
-    })),
+export const useTokusatsuData = ({ query }: UseTokusatsuDataProps) => {
+  return useQuery({
+    queryKey: ['tokuSearch', query],
+    queryFn: () => searchTokuMulti(query),
+    enabled: !!query,
+    staleTime: 1000 * 60 * 5,
   });
-
-  const isLoading = queryResults.some(q => q.isLoading);
-  const isError = queryResults.some(q => q.isError);
-
-  const masterList = queryResults.filter(q => q.data).flatMap(q => q.data);
-
-  const uniqueMasterList = Array.from(
-    new Map(masterList.map((item: any) => [item.id, item])).values(),
-  );
-
-  return {
-    data: uniqueMasterList,
-    isLoading,
-    isError,
-  };
 };

@@ -7,7 +7,17 @@ import { AppProvider } from './context/AppProvider';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AppProvider>
+    <AppProvider
+      handleAddWork={() => {}}
+      handleRemoveWork={() => {}}
+      handleSearchTitle={() => {}}
+      isListError={false}
+      isListLoading={false}
+      resetSearch={() => {}}
+      searchTitle=""
+      selectedTokuWorks={[]}
+      setSelectedTokuWorks={() => {}}
+    >
       <App />
     </AppProvider>
   </StrictMode>,
