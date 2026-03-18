@@ -34,8 +34,8 @@ export const SelectionGrid = React.memo(
 
     return (
       <>
-        <div className="w-full max-w-xl mx-auto p-3">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-2">
+        <div className="w-full max-w-3xl mx-auto p-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 p-2">
             {selectedTokuTitles.map((item, index) => (
               <div
                 key={item?.id || index}
