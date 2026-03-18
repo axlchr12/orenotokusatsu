@@ -1,6 +1,6 @@
 {
   "title": "<0>Tokusatsu</0>Ku",
-  "description": "Pilih serial Tokusatsu favoritmu dan bagikan ke media sosial!",
+  "description": "Pilih judul Tokusatsu favoritmu dan bagikan ke media sosial!",
   "titleModal": "Cari Judul",
   "addItem": "Tambah",
   "search": "Cari",
@@ -12,5 +12,5 @@
   "watermark": "Dibuat dengan {{appName}}-{{appVersion}}",
   "share": "Bagikan!",
   "shareOnProcess": "Memproses...",
-  "overviewShowModalTitle": "Rincian karya"
+  "overviewShowModalTitle": "Detail Judul"
 }

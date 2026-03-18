@@ -12,5 +12,5 @@
   "watermark": "{{appName}}-{{appVersion}} で作成",
   "share": "シェアする",
   "shareOnProcess": "共有処理中...",
-  "overviewShowModalTitle": "作品の概要"
+  "overviewShowModalTitle": "作品の詳細"
 }

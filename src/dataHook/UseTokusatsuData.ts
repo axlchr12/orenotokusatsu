@@ -45,7 +45,7 @@ const searchTokuMulti = async (query: string) => {
           titleJapanese: item.original_name || item.original_title,
           year: date ? date.split('-')[0] : 'N/A',
           overview: item.overview,
-          overviewJp: itemJP?.overview || '概要はありません',
+          overviewJp: itemJP?.overview || '詳細なし',
           image: item.poster_path
             ? `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500${item.poster_path}`
             : null,

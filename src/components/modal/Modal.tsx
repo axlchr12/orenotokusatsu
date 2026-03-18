@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { TranslateProps } from '../../dataHook';
 import classNames from 'classnames';
 
@@ -34,10 +34,6 @@ export const Modal = ({
     }
   }, [show]);
 
-  const translatedTitle = useMemo(() => {
-    return translate(title);
-  }, [title, translate]);
-
   if (!render) return null;
 
   return (
@@ -65,7 +61,7 @@ export const Modal = ({
         >
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-gray-800">
-              {translatedTitle}
+              {translate(title)}
             </h3>
             <button
               onClick={onClose}
