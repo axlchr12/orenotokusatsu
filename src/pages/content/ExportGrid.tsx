@@ -76,9 +76,9 @@ export const ExportGrid = ({
             transformOrigin: 'top left',
             width: element.offsetWidth + 'px',
             height: element.offsetHeight + 'px',
-            filter: 'none',
-            boxShadow: 'none',
             borderRadius: '0',
+            boxShadow: '0px 0px 0px rgba(0,0,0,0) !important',
+            filter: 'none !important',
           },
 
           pixelRatio: 3,
@@ -153,7 +153,7 @@ export const ExportGrid = ({
     <button
       onClick={_onClick}
       className={classNames(
-        'px-4 py-2.5 rounded-xl shadow-xl font-bold text-white transition-all duration-300',
+        'px-4 py-2.5 rounded-xl shadow-md font-bold text-white transition-all duration-300',
         {
           'bg-gray-400 cursor-not-allowed grayscale opacity-70': disabled,
           'bg-sky-600 hover:bg-sky-700 active:scale-75 cursor-pointer':
