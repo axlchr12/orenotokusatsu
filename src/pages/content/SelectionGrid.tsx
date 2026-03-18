@@ -39,7 +39,7 @@ export const SelectionGrid = React.memo(
             {selectedTokuTitles.map((item, index) => (
               <div
                 key={item?.id || index}
-                className="relative flex flex-col items-center justify-center aspect-square border-2 border-gray-300 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all md:shadow-md overflow-hidden backdrop-blur-sm duration-300"
+                className="relative flex flex-col items-center justify-center aspect-square border border-gray-200/60 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all md:shadow-md overflow-hidden backdrop-blur-sm duration-300"
                 onClick={() => !item && onOpenModal(index)}
               >
                 <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700/90 px-2 py-1 rounded-br-xl z-30 md:shadow-md md:transition-shadow">
