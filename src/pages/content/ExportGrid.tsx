@@ -57,13 +57,15 @@ export const ExportGrid = ({
 
       await Promise.all(promises);
 
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       const dataUrl = await toJpeg(contentRef.current!, {
         quality: 0.95,
         backgroundColor: '#eaefef',
-        cacheBust: false,
-        style: {
-          filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
-        },
+        cacheBust: true,
+        pixelRatio: 2,
+        preferredFontFormat: 'woff2',
+        skipAutoScale: true,
         filter: node => {
           const exclusionClasses = ['no-export'];
           return !exclusionClasses.some(cls => node.classList?.contains(cls));
@@ -81,6 +83,7 @@ export const ExportGrid = ({
       const shareTitle = translate('titleToShare');
       const cleanTitle = rawTitle.replace(/<\/?[0-9]+>/g, '');
       const fileName = `${cleanTitle}.jpg`;
+      const fullText = `${shareText}\n\n${window.location.href}`;
 
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File([blob], fileName, { type: 'image/jpeg' });
@@ -93,8 +96,8 @@ export const ExportGrid = ({
         await navigator.share({
           files: [file],
           title: shareTitle,
-          text: `${shareText}\n\n`,
-          url: window.location.href,
+          text: fullText,
+          // url: window.location.href,
         });
       } else {
         const link = document.createElement('a');

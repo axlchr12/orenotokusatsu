@@ -35,7 +35,7 @@ export const SelectionGrid = React.memo(
     return (
       <>
         <div className="w-full max-w-3xl mx-auto p-3">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
             {selectedTokuTitles.map((item, index) => (
               <div
                 key={item?.id || index}
@@ -62,7 +62,7 @@ export const SelectionGrid = React.memo(
                           ? `${item.image}&lang=${currentLanguage}`
                           : 'https://placehold.co/150'
                       }
-                      loading="eager"
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       alt={item.title}
                       referrerPolicy="no-referrer"
