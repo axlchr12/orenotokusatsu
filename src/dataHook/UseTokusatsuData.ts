@@ -6,20 +6,26 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const searchTokuMulti = async (query: string) => {
   if (!query) return [];
 
-  const url = `${BASE_URL}/search/multi?query=${encodeURIComponent(query)}&include_adult=true&language=en-US&page=1`;
+  const urlEN = `${BASE_URL}/search/multi?query=${encodeURIComponent(query)}&include_adult=true&language=en-US&page=1`;
+  const urlJP = `${BASE_URL}/search/multi?query=${encodeURIComponent(query)}&include_adult=true&language=ja-JP&page=1`;
+
+  const headers = {
+    accept: 'application/json',
+    Authorization: `Bearer ${TMDB_TOKEN}`,
+  };
 
   try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${TMDB_TOKEN}`,
-      },
-    });
+    const [resEN, resJP] = await Promise.all([
+      fetch(urlEN, { headers }),
+      fetch(urlJP, { headers }),
+    ]);
 
-    if (!response.ok) throw new Error('Failed to fetch TMDb');
-    const data = await response.json();
-    return (data.results || [])
+    if (!resEN.ok || !resJP.ok) throw new Error('Failed to fetch TMDb data');
+
+    const dataEN = await resEN.json();
+    const dataJP = await resJP.json();
+
+    return (dataEN.results || [])
       .filter((item: any) => {
         const isMedia = item.media_type === 'tv' || item.media_type === 'movie';
         const isJapan = item.original_language === 'ja';
@@ -30,13 +36,16 @@ const searchTokuMulti = async (query: string) => {
         return isMedia && isJapan && hasTokuVibe && isNotAnime;
       })
       .map((item: any) => {
+        const itemJP = dataJP.results.find((j: any) => j.id === item.id);
         const date = item.first_air_date || item.release_date || '';
+
         return {
           id: item.id,
           title: item.name || item.title,
           titleJapanese: item.original_name || item.original_title,
           year: date ? date.split('-')[0] : 'N/A',
           overview: item.overview,
+          overviewJp: itemJP?.overview || '概要はありません',
           image: item.poster_path
             ? `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500${item.poster_path}`
             : null,
@@ -45,7 +54,7 @@ const searchTokuMulti = async (query: string) => {
         };
       });
   } catch (error) {
-    console.error('Search error:', error);
+    throw new Error('Failed to share:', { cause: error });
     return [];
   }
 };

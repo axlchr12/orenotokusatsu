@@ -6,10 +6,11 @@
   "search": "Search",
   "searchPlaceholder": "Search for... (e.g. Kamen Rider Zeztz)",
   "searchResults": "Search results for \"{{query}}\"",
-  "dataNotFound": "No results found",
+  "dataNotFound": "No data found",
   "onLoadingData": "Loading data...",
   "duplicateEntries": "\"{{title}}\" is already in your list",
   "watermark": "Made with {{appName}}-{{appVersion}}",
   "share": "Share!",
-  "shareOnProcess": "Sharing..."
+  "shareOnProcess": "Sharing...",
+  "overviewShowModalTitle": "Details of Show"
 }

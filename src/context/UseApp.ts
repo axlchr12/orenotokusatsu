@@ -9,6 +9,8 @@ export type TokuItem = {
   titleJapanese: string;
   type: string;
   year: string;
+  overview: string;
+  overviewJp: string;
 };
 
 export type UseAppMethods = {

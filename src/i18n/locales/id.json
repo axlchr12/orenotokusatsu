@@ -6,10 +6,11 @@
   "search": "Cari",
   "searchPlaceholder": "Cari judul... (misal: Kamen Rider Zeztz)",
   "searchResults": "Hasil pencarian untuk \"{{query}}\"",
-  "dataNotFound": "Hasil tidak ditemukan",
+  "dataNotFound": "Data tidak ditemukan",
   "onLoadingData": "Memuat data...",
   "duplicateEntries": "\"{{title}}\" sudah ada di daftar kamu",
   "watermark": "Dibuat dengan {{appName}}-{{appVersion}}",
   "share": "Bagikan!",
-  "shareOnProcess": "Memproses..."
+  "shareOnProcess": "Memproses...",
+  "overviewShowModalTitle": "Rincian karya"
 }

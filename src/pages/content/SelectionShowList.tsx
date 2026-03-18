@@ -17,7 +17,7 @@ export const SelectionShowList = ({
   isListLoading,
 }: SelectionShowListProps) => {
   return (
-    <div className="max-h-87.5 overflow-y-auto">
+    <div className="max-h-96 overflow-y-auto">
       {searchTitle && (
         <p className="text-xs text-gray-400 uppercase tracking-wider mb-3 z-10 py-3">
           {translate('searchResults', { query: searchTitle })}
@@ -41,7 +41,7 @@ export const SelectionShowList = ({
               handleAddWork(show);
             }}
           >
-            <div className="w-20 h-25 bg-gray-200 rounded-xl border border-gray-100">
+            <div className="w-16 sm:w-22 h-full bg-gray-200 rounded-xl border border-gray-100">
               <img
                 src={show.image || 'https://placehold.co/150'}
                 className="w-full h-full object-cover"
@@ -51,15 +51,13 @@ export const SelectionShowList = ({
             </div>
 
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-600 truncate sm:whitespace-normal">
+              <h4 className="text-sm font-bold text-gray-800 group-hover:text-sky-600">
                 [{show.type}-{show.year}]&nbsp;{show.title}
               </h4>
 
-              {show?.titleJapanese && show?.titleJapanese !== show?.title && (
-                <p className="text-[11px] text-gray-500 italic truncate sm:whitespace-normal group-hover:text-sky-600">
-                  [{show.type}-{show.year}]&nbsp;{show.titleJapanese}
-                </p>
-              )}
+              <p className="text-[11px] text-gray-400 italic group-hover:text-sky-600">
+                [{show.type}-{show.year}]&nbsp;{show.titleJapanese}
+              </p>
             </div>
 
             <div className="min-w-0">

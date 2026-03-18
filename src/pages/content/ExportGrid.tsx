@@ -31,8 +31,7 @@ export const ExportGrid = ({
     setIsExporting(true);
 
     if (!contentRef.current) {
-      console.error('Element not found!');
-      return;
+      throw new Error('Failed to share:', { cause: 'Element not found' });
     }
 
     try {
@@ -70,7 +69,7 @@ export const ExportGrid = ({
         link.click();
       }
     } catch (err) {
-      console.error('Failed to share:', err);
+      throw new Error('Failed to share:', { cause: err });
     } finally {
       setIsExporting(false);
     }
