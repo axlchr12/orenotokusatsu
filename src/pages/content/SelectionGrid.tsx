@@ -39,10 +39,10 @@ export const SelectionGrid = React.memo(
             {selectedTokuTitles.map((item, index) => (
               <div
                 key={item?.id || index}
-                className="relative flex flex-col items-center justify-center aspect-square border border-gray-100 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all shadow-xl overflow-hidden backdrop-blur-sm"
+                className="relative flex flex-col items-center justify-center aspect-square border border-gray-100 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all shadow-xl overflow-hidden backdrop-blur-sm duration-300"
                 onClick={() => !item && onOpenModal(index)}
               >
-                <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700 px-2 py-1 rounded-br-lg z-30 shadow-xl transition-shadow">
+                <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700/90 px-2 py-1 rounded-br-xl z-30 shadow-xl transition-shadow">
                   {index + 1}
                 </span>
                 {item ? (
@@ -52,26 +52,25 @@ export const SelectionGrid = React.memo(
                         e.stopPropagation();
                         handleRemoveWork(index);
                       }}
-                      className="absolute top-0 right-0 z-40 bg-red-600 hover:bg-red-600 text-white w-7 h-7 sm:w-6 sm:h-6 rounded-bl-lg flex items-center justify-center transition-all hover:scale-105 active:scale-75 shadow-xl no-export cursor-pointer"
+                      className="absolute top-0 right-0 z-40 bg-red-500/90 hover:bg-red-600 text-white w-7 h-7 rounded-bl-xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-75 shadow-xl no-export cursor-pointer"
                     >
-                      <span className="text-lg font-bold">&times;</span>
+                      <span className="text-lg leading-none">&times;</span>
                     </button>
                     <img
-                      key={`${item.id}-${currentLanguage}`}
                       src={
                         item.image
                           ? `${item.image}&lang=${currentLanguage}`
                           : 'https://placehold.co/150'
                       }
                       loading="eager"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       alt={item.title}
                       referrerPolicy="no-referrer"
                       onClick={() => onOpenOverviewModal(index)}
                       crossOrigin="anonymous"
                     />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black backdrop-blur-sm p-1.5 z-20">
-                      <p className="text-white text-[9px] sm:text-[12px] font-medium leading-relaxed text-center">
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-1.5 z-20 translate-y-0 transition-transform rounded-b-xl">
+                      <p className="text-white text-[9px] sm:text-[11px] font-medium leading-tight text-center line-clamp-2">
                         [{item?.type}-{item?.year}]&nbsp;
                         {currentLanguage === 'ja'
                           ? item?.titleJapanese
@@ -80,11 +79,11 @@ export const SelectionGrid = React.memo(
                     </div>
                   </>
                 ) : (
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="text-gray-300 text-4xl font-light group-hover:text-sky-400 transition-colors">
+                  <div className="flex flex-col items-center gap-1 group transition-transform duration-300 hover:scale-110">
+                    <div className="text-gray-300 text-4xl font-light group-hover:text-sky-400 transition-colors duration-300">
                       +
                     </div>
-                    <div className="text-gray-400 text-[10px] sm:text-xs font-light group-hover:text-sky-400 transition-colors uppercase tracking-wider">
+                    <div className="text-gray-400 text-[9px] sm:text-[10px] font-light group-hover:text-sky-400 transition-colors duration-300 uppercase tracking-widest">
                       {translate('addItem')}
                     </div>
                   </div>

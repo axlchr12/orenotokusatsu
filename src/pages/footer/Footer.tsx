@@ -8,7 +8,7 @@ export const Footer = () => {
     <>
       <section id="footer">
         <div id="copyright" className="flex items-center justify-center ">
-          <span className="text-[13px] tracking-tighter">
+          <span className="text-[13px] tracking-widest">
             &copy; {currentYear} {appName}-{appVersion}. All Rights Reserved. |
             <a
               href="https://github.com/axlchr12/orenotokusatsu/"

@@ -20,7 +20,7 @@ export const SearchForm = ({ handleSearch, translate }: SearchFormProps) => {
         <div className="relative flex-1">
           <input
             type="text"
-            className="block w-full px-4 py-2.5 border border-gray-300 rounded-l-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-sky-500 focus:z-10 transition-all sm:text-sm"
+            className="block w-full px-4 py-2.5 border border-gray-300 rounded-l-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-sky-500 focus:z-10 transition-all duration-200 sm:text-sm"
             placeholder={translate('searchPlaceholder')}
             autoFocus
             onChange={onChangeText}
@@ -34,7 +34,7 @@ export const SearchForm = ({ handleSearch, translate }: SearchFormProps) => {
 
         <button
           type="button"
-          className="px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold rounded-r-xl border border-sky-600 transition-all shadow-xl active:scale-75 focus:z-10"
+          className="px-4 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold duration-200 rounded-r-xl border border-sky-600 transition-all shadow-xl active:scale-75 focus:z-10 cursor-pointer"
           onClick={() => handleSearch(inputValue)}
         >
           {translate('search')}

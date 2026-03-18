@@ -46,7 +46,7 @@ export const SelectionModal = ({
   const _handleAddWork = useCallback(
     (newItem: TokuItem) => {
       const isDuplicate = selectedTokuTitles.some(
-        work => work !== null && work.id === newItem.id,
+        work => work?.id === newItem.id,
       );
 
       if (isDuplicate) {

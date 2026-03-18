@@ -70,7 +70,7 @@ export const Modal = ({
             </h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors text-2xl cursor-pointer"
+              className="text-gray-400 hover:text-gray-600 hover:bg-black/5 rounded-xl px-2 transition-all duration-200 text-2xl cursor-pointer active:scale-75"
             >
               &times;
             </button>

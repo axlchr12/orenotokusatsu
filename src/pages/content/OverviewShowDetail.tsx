@@ -27,7 +27,7 @@ export const OverviewShowDetail = ({
           </div>
 
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-bold text-gray-800 leading-relaxed">
+            <h4 className="text-sm font-bold text-gray-800 leading-tight">
               [{tokuTitle.type}-{tokuTitle.year}]&nbsp;{tokuTitle.title}
             </h4>
 

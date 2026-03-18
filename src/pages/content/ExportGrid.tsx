@@ -120,9 +120,9 @@ export const ExportGrid = ({
     <button
       onClick={_onClick}
       className={classNames(
-        'px-4 py-2.5 rounded-xl shadow-xl font-bold text-white transition-all',
+        'px-4 py-2.5 rounded-xl shadow-xl font-bold text-white transition-all duration-300',
         {
-          'bg-gray-400 cursor-not-allowed': disabled,
+          'bg-gray-400 cursor-not-allowed grayscale opacity-70': disabled,
           'bg-sky-600 hover:bg-sky-700 active:scale-75 cursor-pointer':
             !disabled,
         },

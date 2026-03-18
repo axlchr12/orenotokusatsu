@@ -40,15 +40,15 @@ export const SelectionShowList = React.memo(
           searchedTitles?.map((show, index: number) => (
             <div
               key={show?.id || index}
-              className="flex items-center gap-3 p-2 hover:bg-gray-200 rounded-xl cursor-pointer transition-all mb-1 group active:scale-75"
+              className="flex items-center gap-3 p-2 rounded-xl cursor-pointer mb-1 group transition-all duration-200 hover:bg-sky-50 active:scale-75"
               onClick={() => {
                 handleAddWork(show);
               }}
             >
-              <div className="w-16 sm:w-22 h-full bg-gray-200 rounded-xl border border-gray-100">
+              <div className="w-16 sm:w-22 h-full bg-gray-200 rounded-xl overflow-hidden border border-gray-100 shadow-sm">
                 <img
                   src={show.image || 'https://placehold.co/150'}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   alt={show.title}
                   referrerPolicy="no-referrer"
                   crossOrigin="anonymous"
@@ -57,15 +57,14 @@ export const SelectionShowList = React.memo(
               </div>
 
               <div className="flex-1 min-w-0">
-                <h4 className="text-xs sm:text-sm font-bold text-gray-800 group-hover:text-sky-600 leading-relaxed">
+                <h4 className="text-xs sm:text-sm font-bold text-gray-800 leading-tight transition-colors duration-200 group-hover:text-sky-600">
                   [{show.type}-{show.year}]&nbsp;{show.title}
                 </h4>
 
-                <p className="text-[11px] text-gray-400 italic group-hover:text-sky-600 leading">
+                <p className="text-[11px] text-gray-400 italic leading-relaxed transition-colors duration-200 group-hover:text-sky-600">
                   [{show.type}-{show.year}]&nbsp;{show.titleJapanese}
                 </p>
               </div>
-
               <div className="min-w-0">
                 <div className="text-gray-400 text-4xl font-light group-hover:text-sky-600 transition-colors">
                   +
