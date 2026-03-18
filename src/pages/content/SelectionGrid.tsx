@@ -62,7 +62,7 @@ export const SelectionGrid = React.memo(
                           ? `${item.image}&lang=${currentLanguage}`
                           : 'https://placehold.co/150'
                       }
-                      loading="lazy"
+                      // loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       alt={item.title}
                       referrerPolicy="no-referrer"

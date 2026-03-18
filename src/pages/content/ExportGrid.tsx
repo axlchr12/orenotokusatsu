@@ -44,7 +44,8 @@ export const ExportGrid = ({
 
         if (img.src && !img.src.startsWith('data:')) {
           try {
-            const base64 = await toBase64(img.src);
+            const cleanUrl = `${img.src}${img.src.includes('?') ? '&' : '?'}t=${new Date().getTime()}`;
+            const base64 = await toBase64(cleanUrl);
             img.src = base64;
           } catch (e) {
             throw new Error(
@@ -62,10 +63,12 @@ export const ExportGrid = ({
       const dataUrl = await toJpeg(contentRef.current!, {
         quality: 0.95,
         backgroundColor: '#eaefef',
-        cacheBust: true,
-        pixelRatio: 2,
-        preferredFontFormat: 'woff2',
-        skipAutoScale: true,
+        cacheBust: false,
+        style: {
+          filter: isMobile
+            ? 'none'
+            : 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
+        },
         filter: node => {
           const exclusionClasses = ['no-export'];
           return !exclusionClasses.some(cls => node.classList?.contains(cls));
@@ -103,7 +106,9 @@ export const ExportGrid = ({
         const link = document.createElement('a');
         link.download = fileName;
         link.href = dataUrl;
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
       }
     } catch (err) {
       setIsExporting(false);
