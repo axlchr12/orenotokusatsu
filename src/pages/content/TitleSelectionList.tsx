@@ -16,7 +16,7 @@ export const TitleSelectionList = ({
   currentLanguage,
 }: TitleSelectionListProps) => {
   const {
-    selectedselectedTokuTitles,
+    selectedTokuTitles,
     handleRemoveWork,
     handleAddWork,
     resetSearch,
@@ -29,16 +29,16 @@ export const TitleSelectionList = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [activeSlot, setActiveSlot] = useState<number | undefined>(undefined);
 
-  const onOpenModal = (index: number) => {
+  const onOpenModal = useCallback((index: number) => {
     setShowModal(true);
     setActiveSlot(index);
-  };
+  }, []);
 
-  const onCloseModal = () => {
+  const onCloseModal = useCallback(() => {
     setActiveSlot(undefined);
     setShowModal(false);
     resetSearch();
-  };
+  }, []);
 
   const _handleAddWork = useCallback(
     (newItem: TokuItem) => {
@@ -53,7 +53,7 @@ export const TitleSelectionList = ({
   return (
     <>
       <SelectionGrid
-        selectedselectedTokuTitles={selectedselectedTokuTitles}
+        selectedTokuTitles={selectedTokuTitles}
         handleRemoveWork={handleRemoveWork}
         onOpenModal={onOpenModal}
         translate={translate}
@@ -68,7 +68,7 @@ export const TitleSelectionList = ({
         searchedTitles={searchedTitles}
         translate={translate}
         searchTitle={searchTitle}
-        selectedselectedTokuTitles={selectedselectedTokuTitles}
+        selectedTokuTitles={selectedTokuTitles}
         currentLanguage={currentLanguage}
         isListLoading={isListLoading}
       />

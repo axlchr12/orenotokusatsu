@@ -21,17 +21,22 @@ export const Modal = ({
   const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
     if (show) {
       setRender(true);
       setIsClosing(false);
     } else {
       setIsClosing(true);
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setRender(false);
         setIsClosing(false);
       }, 200);
-      return () => clearTimeout(timer);
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [show]);
 
   if (!render) return null;

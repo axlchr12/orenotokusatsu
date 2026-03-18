@@ -11,6 +11,8 @@ type ExportGridProps = {
   selectedWorks: (TokuItem | null)[];
 };
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 export const ExportGrid = ({
   translate,
   contentRef,
@@ -24,9 +26,7 @@ export const ExportGrid = ({
     return !isFullSelect || isExporting;
   }, [selectedWorks, isExporting]);
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const handleShare = async () => {
+  const handleShare = useCallback(async () => {
     if (isExporting) return;
 
     setIsExporting(true);
@@ -76,8 +76,14 @@ export const ExportGrid = ({
         }
       });
 
+      const rawTitle = translate('title');
+      const shareText = translate('textToShare');
+      const shareTitle = translate('titleToShare');
+      const cleanTitle = rawTitle.replace(/<\/?[0-9]+>/g, '');
+      const fileName = `${cleanTitle}.jpg`;
+
       const blob = await (await fetch(dataUrl)).blob();
-      const file = new File([blob], 'my-tokusatsu.jpg', { type: 'image/jpeg' });
+      const file = new File([blob], fileName, { type: 'image/jpeg' });
 
       if (
         isMobile &&
@@ -86,22 +92,23 @@ export const ExportGrid = ({
       ) {
         await navigator.share({
           files: [file],
-          title: 'testTitle',
-          text: 'cekidot:',
+          title: shareTitle,
+          text: `${shareText}\n\n`,
           url: window.location.href,
         });
       } else {
         const link = document.createElement('a');
-        link.download = 'my-tokusatsu-list.jpg';
+        link.download = fileName;
         link.href = dataUrl;
         link.click();
       }
     } catch (err) {
+      setIsExporting(false);
       throw new Error('Failed to share:', { cause: err });
     } finally {
       setIsExporting(false);
     }
-  };
+  }, [isExporting, isMobile, translate, contentRef]);
 
   const _onClick = useCallback(() => {
     if (disabled) return;

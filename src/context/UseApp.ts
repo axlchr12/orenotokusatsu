@@ -14,8 +14,8 @@ export type TokuItem = {
 };
 
 export type UseAppMethods = {
-  selectedselectedTokuTitles: (TokuItem | null)[];
-  setSelectedselectedTokuTitles: React.Dispatch<
+  selectedTokuTitles: (TokuItem | null)[];
+  setSelectedTokuTitles: React.Dispatch<
     React.SetStateAction<(TokuItem | null)[]>
   >;
   handleAddWork: (newItem: TokuItem, index: number) => void;
@@ -33,9 +33,9 @@ type UseAppProps = {
 };
 
 export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
-  const [selectedselectedTokuTitles, setSelectedselectedTokuTitles] = useState<
+  const [selectedTokuTitles, setSelectedTokuTitles] = useState<
     (TokuItem | null)[]
-  >(Array(12).fill(null));
+  >(Array(3).fill(null));
   const [searchTitle, setSearchTitle] = useState<string>('');
 
   const {
@@ -48,31 +48,31 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
     setSearchTitle('');
   }, []);
 
-  const handleAddWork = (newItem: TokuItem, index: number) => {
-    setSelectedselectedTokuTitles(prev => {
+  const handleAddWork = useCallback((newItem: TokuItem, index: number) => {
+    setSelectedTokuTitles(prev => {
       const copy = [...prev];
       copy[index] = newItem;
       return copy;
     });
-  };
+  }, []);
 
-  const handleRemoveWork = (index: number) => {
-    setSelectedselectedTokuTitles(prev => {
+  const handleRemoveWork = useCallback((index: number) => {
+    setSelectedTokuTitles(prev => {
       const copy = [...prev];
       copy[index] = null;
       return copy;
     });
-  };
+  }, []);
 
-  const handleSearchTitle = (title: string) => {
+  const handleSearchTitle = useCallback((title: string) => {
     setSearchTitle(title);
-  };
+  }, []);
 
   const searchedTitles = useMemo(() => {
     if (!masterListToku || !searchTitle) return [];
 
     if (currentLanguage === 'ja')
-      return masterListToku?.filter((item: any) =>
+      return masterListToku.filter((item: any) =>
         item.titleJapanese?.includes(searchTitle),
       );
 
@@ -82,8 +82,8 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
   }, [masterListToku, currentLanguage, searchTitle]);
 
   return {
-    selectedselectedTokuTitles,
-    setSelectedselectedTokuTitles,
+    selectedTokuTitles,
+    setSelectedTokuTitles,
     handleAddWork,
     handleRemoveWork,
     isListError,

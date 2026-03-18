@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type DuplicateErrorAlertProps = {
   message: string;
@@ -12,15 +12,18 @@ export const DuplicateErrorAlert = ({
 }: DuplicateErrorAlertProps) => {
   const [isExiting, setIsExiting] = useState(false);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsExiting(true);
-    setTimeout(onClose, 300);
-  };
+    const timer = setTimeout(() => {
+      onClose();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   useEffect(() => {
     const timer = setTimeout(handleClose, 3000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [handleClose]);
 
   return (
     <div
@@ -35,7 +38,7 @@ export const DuplicateErrorAlert = ({
       <div className="flex items-center p-4 border rounded-xl shadow-xl transition-shadow bg-red-50 border-red-200 text-red-800">
         <div className="flex-1 text-xs sm:text-sm font-medium">{message}</div>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className=" hover:bg-black/5 transition-colors text-sm text-red-800 cursor-pointer"
         >
           &times;

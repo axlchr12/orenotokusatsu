@@ -14,7 +14,7 @@ type SelectionModalProps = {
   searchedTitles: TokuItem[] | undefined;
   translate: TranslateProps;
   searchTitle: string;
-  selectedselectedTokuTitles: (TokuItem | null)[];
+  selectedTokuTitles: (TokuItem | null)[];
   currentLanguage: string;
   isListLoading: boolean;
 };
@@ -28,7 +28,7 @@ export const SelectionModal = ({
   searchedTitles,
   translate,
   searchTitle,
-  selectedselectedTokuTitles,
+  selectedTokuTitles,
   currentLanguage,
   isListLoading,
 }: SelectionModalProps) => {
@@ -45,7 +45,7 @@ export const SelectionModal = ({
 
   const _handleAddWork = useCallback(
     (newItem: TokuItem) => {
-      const isDuplicate = selectedselectedTokuTitles.some(
+      const isDuplicate = selectedTokuTitles.some(
         work => work !== null && work.id === newItem.id,
       );
 
@@ -53,9 +53,7 @@ export const SelectionModal = ({
         setAlertInfo({
           message: translate('duplicateEntries', {
             title:
-              currentLanguage === 'ja'
-                ? newItem?.titleJapanese
-                : newItem?.title,
+              currentLanguage === 'ja' ? newItem.titleJapanese : newItem.title,
           }),
         });
         return;
@@ -66,7 +64,7 @@ export const SelectionModal = ({
         _onClose();
       }
     },
-    [handleAddWork, selectedselectedTokuTitles, _onClose, currentLanguage],
+    [handleAddWork, selectedTokuTitles, translate, _onClose, currentLanguage],
   );
 
   return (

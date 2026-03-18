@@ -27,10 +27,12 @@ const searchTokuMulti = async (query: string) => {
 
     return (dataEN.results || [])
       .filter((item: any) => {
-        const isMedia = item.media_type === 'tv' || item.media_type === 'movie';
+        const isMedia =
+          (item.media_type === 'tv' || item.media_type === 'movie') &&
+          item.poster_path;
         const isJapan = item.original_language === 'ja';
         const hasTokuVibe = item.genre_ids?.some((id: number) =>
-          [10765, 878, 14].includes(id),
+          [10765, 878].includes(id),
         );
         const isNotAnime = !item.genre_ids?.includes(16);
         return isMedia && isJapan && hasTokuVibe && isNotAnime;
@@ -55,7 +57,6 @@ const searchTokuMulti = async (query: string) => {
       });
   } catch (error) {
     throw new Error('Failed to share:', { cause: error });
-    return [];
   }
 };
 
@@ -69,5 +70,6 @@ export const useTokusatsuData = ({ query }: UseTokusatsuDataProps) => {
     queryFn: () => searchTokuMulti(query),
     enabled: !!query,
     staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 30,
   });
 };

@@ -12,5 +12,7 @@
   "watermark": "Dibuat dengan {{appName}}-{{appVersion}}",
   "share": "Bagikan!",
   "shareOnProcess": "Memproses...",
-  "overviewShowModalTitle": "Detail Judul"
+  "overviewShowModalTitle": "Detail Judul",
+  "titleToShare": "Top 12 Tokusatsu Favoritku",
+  "textToShare": "Inilah top 12 Tokusatsu versi gue! Gimana top 12 versi lu? Share balik dong di sini:"
 }

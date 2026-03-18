@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { TokuItem } from '../../context';
 import type { TranslateProps } from '../../dataHook';
 import { OverviewShowDetail } from './OverviewShowDetail';
@@ -9,7 +9,7 @@ type OverviewShowModalProps = {
   onClose: () => void;
   title: string;
   translate: TranslateProps;
-  selectedselectedTokuTitles: (TokuItem | null)[];
+  selectedTokuTitles: (TokuItem | null)[];
   activeSlot: number | undefined;
   currentLanguage: string;
 };
@@ -19,28 +19,21 @@ export const OverviewShowModal = ({
   onClose,
   title,
   translate,
-  selectedselectedTokuTitles,
+  selectedTokuTitles,
   activeSlot,
   currentLanguage,
 }: OverviewShowModalProps) => {
-  const _onClose = useCallback(() => {
-    if (typeof onClose === 'function') {
-      onClose();
+  const tokuTitle = useMemo(() => {
+    if (typeof activeSlot === 'number' && selectedTokuTitles) {
+      return selectedTokuTitles[activeSlot] || null;
     }
-  }, [onClose]);
-
-  const tokuShow = useMemo(() => {
-    if (typeof activeSlot === 'number' && selectedselectedTokuTitles) {
-      return selectedselectedTokuTitles[activeSlot];
-    }
-
     return null;
-  }, [activeSlot, selectedselectedTokuTitles]);
+  }, [activeSlot, selectedTokuTitles]);
 
   return (
-    <Modal onClose={_onClose} show={show} title={title} translate={translate}>
+    <Modal onClose={onClose} show={show} title={title} translate={translate}>
       <OverviewShowDetail
-        tokuShow={tokuShow}
+        tokuTitle={tokuTitle}
         currentLanguage={currentLanguage}
       />
     </Modal>

@@ -12,5 +12,7 @@
   "watermark": "Made with {{appName}}-{{appVersion}}",
   "share": "Share!",
   "shareOnProcess": "Sharing...",
-  "overviewShowModalTitle": "Title Details"
+  "overviewShowModalTitle": "Title Details",
+  "titleToShare": "My Top 12 Tokusatsu List",
+  "textToShare": "Just ranked my Top 12 Tokusatsu of all time! What’s yours? Create your own list here:"
 }
