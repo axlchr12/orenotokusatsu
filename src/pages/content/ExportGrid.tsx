@@ -3,7 +3,11 @@ import type { TranslateProps } from '../../dataHook';
 import { toCanvas, toJpeg } from 'html-to-image';
 import type { TokuItem } from '../../context';
 import classNames from 'classnames';
-import { convertImagesToBase64Batched, getExportConfig } from '../../utils';
+import {
+  convertImagesToBase64Batched,
+  getExportConfig,
+  waitForImages,
+} from '../../utils';
 
 type ExportGridProps = {
   translate: TranslateProps;
@@ -35,8 +39,9 @@ export const ExportGrid = ({
       const images = element.querySelectorAll('img');
       const originalSrcs: string[] = [];
       await convertImagesToBase64Batched(images, originalSrcs, 3);
-
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await waitForImages(images);
+      await new Promise(resolve => requestAnimationFrame(resolve));
+      await new Promise(resolve => requestAnimationFrame(resolve));
 
       let dataUrl: string;
 

@@ -11,6 +11,19 @@ export const toBase64 = async (url: string) => {
   });
 };
 
+export const waitForImages = (
+  imgs: NodeListOf<HTMLImageElement>,
+): Promise<void> => {
+  const promises = Array.from(imgs).map(img => {
+    if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+    return new Promise<void>(resolve => {
+      img.onload = () => resolve();
+      img.onerror = () => resolve(); // tetap lanjut meski error
+    });
+  });
+  return Promise.all(promises).then(() => void 0);
+};
+
 const MAX_CANVAS_SIDE = 4096;
 
 /**
