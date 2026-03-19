@@ -101,7 +101,7 @@ export const ExportGrid = ({
       } else {
         // desktop (laptop, pc)
         dataUrl = await toJpeg(element, {
-          quality: 0.75,
+          quality: 0.95,
           backgroundColor: '#eaefef',
           cacheBust: false,
           pixelRatio: 2,
