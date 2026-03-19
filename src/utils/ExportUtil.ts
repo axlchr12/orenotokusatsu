@@ -18,7 +18,7 @@ export const waitForImages = (
     if (img.complete && img.naturalWidth > 0) return Promise.resolve();
     return new Promise<void>(resolve => {
       img.onload = () => resolve();
-      img.onerror = () => resolve(); // tetap lanjut meski error
+      img.onerror = () => resolve();
     });
   });
   return Promise.all(promises).then(() => void 0);
