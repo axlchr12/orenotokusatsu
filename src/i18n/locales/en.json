@@ -14,5 +14,5 @@
   "shareOnProcess": "Sharing...",
   "overviewShowModalTitle": "Title Details",
   "titleToShare": "My Top 9 Tokusatsu List",
-  "textToShare": "Just ranked my top 9 Tokusatsu of all time! What’s yours? \nURL: {{url}}"
+  "textToShare": "Just ranked my top 9 Tokusatsu of all time! What’s yours? \n\n{{url}}"
 }
