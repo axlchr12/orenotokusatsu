@@ -23,14 +23,21 @@ const searchTokuMulti = async (query: string) => {
           (item.media_type === 'tv' || item.media_type === 'movie') &&
           !!item.poster_path;
         const genreIds = item.genre_ids || [];
+        const isJapan = item.original_language === 'ja';
 
         const hasTokuVibe = genreIds.some((id: number) =>
           [10765, 10759, 878].includes(id),
         );
-        const isNotAnime = !genreIds.includes(16);
 
-        const isJapan = item.original_language === 'ja';
-        return isMedia && isJapan && isNotAnime && hasTokuVibe;
+        let isAnime = !genreIds.includes(16);
+
+        const tolerateQuery = ['bakuage', 'bakuage sentai'].includes(
+          query.toLowerCase(),
+        );
+
+        const passAnimeFilter = !isAnime || tolerateQuery;
+
+        return isMedia && isJapan && passAnimeFilter && hasTokuVibe;
       })
       .slice(0, 5);
 
