@@ -41,35 +41,46 @@ const searchTokuMulti = async (query: string) => {
       .slice(0, 5);
 
     const results = await Promise.all(
-      filteredEN.map(async (item: any) => {
-        try {
-          const detailUrl = `${BASE_URL}/${item.media_type}/${item.id}?language=ja-JP`;
-          const resJP = await fetch(detailUrl, { headers });
-          const itemJP = resJP.ok ? await resJP.json() : null;
+      filteredEN
+        .sort((a: any, b: any) => {
+          const dateA = new Date(
+            a.first_air_date || a.release_date || 0,
+          ).getTime();
+          const dateB = new Date(
+            b.first_air_date || b.release_date || 0,
+          ).getTime();
 
-          const date = item.first_air_date || item.release_date || '';
+          return dateA - dateB;
+        })
+        .map(async (item: any) => {
+          try {
+            const detailUrl = `${BASE_URL}/${item.media_type}/${item.id}?language=ja-JP`;
+            const resJP = await fetch(detailUrl, { headers });
+            const itemJP = resJP.ok ? await resJP.json() : null;
 
-          return {
-            id: item.id,
-            title:
-              item.name === 'Masked Rider DCD'
-                ? 'Kamen Rider Decade'
-                : item.name || item.title,
-            titleJapanese: item.original_name || item.original_title,
-            year: date ? date.split('-')[0] : 'N/A',
-            overview: item.overview || 'No overview.',
-            overviewJp: itemJP?.overview || '詳細なし',
-            image: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w200${itemJP?.poster_path || item.poster_path}&output=jpg&q=70&il&n=-1`,
-            bigImage: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w342${itemJP?.poster_path || item.poster_path}&output=jpg&q=70&il&n=-1`,
-            type: item.media_type,
-            rating: item.vote_average ? item.vote_average.toFixed(1) : '0',
-          };
-        } catch (error) {
-          throw new Error('Failed to capture data:', { cause: error });
-        }
-      }),
+            const date = item.first_air_date || item.release_date || '';
+
+            return {
+              id: item.id,
+              title:
+                item.name === 'Masked Rider DCD'
+                  ? 'Kamen Rider Decade'
+                  : item.name || item.title,
+              titleJapanese: item.original_name || item.original_title,
+              year: date ? date.split('-')[0] : 'N/A',
+              overview: item.overview || 'No overview.',
+              overviewJp: itemJP?.overview || '詳細なし',
+              image: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w200${itemJP?.poster_path || item.poster_path}&output=jpg&q=70&il&n=-1`,
+              bigImage: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w342${itemJP?.poster_path || item.poster_path}&output=jpg&q=70&il&n=-1`,
+              type: item.media_type,
+              rating: item.vote_average ? item.vote_average.toFixed(1) : '0',
+            };
+          } catch (error) {
+            throw new Error('Failed to capture data:', { cause: error });
+          }
+        }),
     );
-
+    console.log({ results });
     return results;
   } catch (error) {
     throw new Error('Failed to capture data:', { cause: error });
