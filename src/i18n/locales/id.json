@@ -14,5 +14,5 @@
   "shareOnProcess": "Memproses...",
   "overviewShowModalTitle": "Detail Judul",
   "titleToShare": "Top 9 Tokusatsu Favoritku",
-  "textToShare": "Inilah top 9 Tokusatsu versi gue! Gimana top 9 versi lu?"
+  "textToShare": "Inilah top 9 Tokusatsu versi gue! Gimana top 9 versi lu? \nURL: {{url}}"
 }

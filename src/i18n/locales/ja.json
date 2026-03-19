@@ -14,5 +14,5 @@
   "shareOnProcess": "共有処理中...",
   "overviewShowModalTitle": "作品の詳細",
   "titleToShare": "俺の特撮ベスト9",
-  "textToShare": "俺の特撮ベスト9を作ってみた！みんなの好きな特撮作品も教えて！"
+  "textToShare": "俺の特撮ベスト9を作ってみた！みんなの好きな特撮作品も教えて！ \nURL: {{url}}"
 }
