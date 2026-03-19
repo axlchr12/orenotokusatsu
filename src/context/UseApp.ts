@@ -44,6 +44,8 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
     isError: isListError,
   } = useTokusatsuData({ query: searchTitle });
 
+  //
+
   const resetSearch = useCallback(() => {
     setSearchTitle('');
   }, []);
