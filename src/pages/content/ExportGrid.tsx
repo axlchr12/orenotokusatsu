@@ -177,11 +177,11 @@ export const ExportGrid = ({
         document.body.removeChild(link);
       }
     } catch (error) {
-      console.error(
-        'Error: ' + (error as any)?.cause?.message ||
-          (error as any)?.message ||
-          String(error),
-      );
+      const msg =
+        (error as any)?.cause?.message ??
+        (error as any)?.message ??
+        String(error);
+      alert('Error: ' + msg);
       throw new Error('Failed to share:', { cause: error });
     } finally {
       setIsExporting(false);
