@@ -56,7 +56,7 @@ The app is built with a global audience in mind, featuring full localization for
     ```
 
 3.  **Environment Variables:**
-    Create a `.env` file and add your TMDB API Key:
+    Create a `.env.local` file and add your TMDB API Key:
     ```env
     VITE_TMDB_API_KEY=your_api_key_here
     ```
