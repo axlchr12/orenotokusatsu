@@ -43,7 +43,7 @@ export const SelectionGrid = React.memo(
                 className="relative flex flex-col items-center justify-center aspect-square border border-gray-200/60 rounded-xl cursor-pointer hover:border-sky-400 hover:bg-sky-50 transition-all md:shadow-md overflow-hidden backdrop-blur-sm duration-300"
                 onClick={() => !item && onOpenModal(index)}
               >
-                <span className="absolute top-0 left-0 text-[10px] sm:text-sm font-bold text-white bg-sky-700/90 px-2 py-1 rounded-br-xl z-30 md:shadow-md md:transition-shadow">
+                <span className="absolute top-0 left-0 flex items-center justify-center aspect-square min-w-6 sm:min-w-8 text-[10px] sm:text-sm font-bold text-white bg-sky-700/90 rounded-br-xl z-30 md:shadow-md md:transition-shadow">
                   {index + 1}
                 </span>
                 {item ? (
@@ -53,7 +53,7 @@ export const SelectionGrid = React.memo(
                         e.stopPropagation();
                         handleRemoveWork(index);
                       }}
-                      className="absolute top-0 right-0 z-40 bg-red-500/90 hover:bg-red-600 text-white w-7 h-7 rounded-bl-xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-75 md:shadow-md no-export cursor-pointer"
+                      className="absolute top-0 right-0 flex items-center justify-center aspect-square min-w-6 sm:min-w-8 text-[10px] sm:text-sm font-bold text-white bg-red-500/90 hover:bg-red-600 rounded-bl-xl z-40 transition-all duration-200 hover:scale-110 active:scale-75 md:shadow-md no-export cursor-pointer"
                     >
                       <span className="text-lg leading-none">&times;</span>
                     </button>

@@ -14,7 +14,7 @@ export const OverviewShowDetail = ({
       {!!tokuTitle && (
         <div
           key={tokuTitle.id}
-          className="flex flex-col sm:flex-row items-center flex-wrap gap-3 p-2 rounded-xl transition-all mb-1 group"
+          className="flex flex-col sm:flex-row items-center flex-wrap gap-3 p-2 rounded-xl mb-1 group"
         >
           <div className="w-48 h-full bg-gray-200 rounded-xl border border-gray-100">
             <img

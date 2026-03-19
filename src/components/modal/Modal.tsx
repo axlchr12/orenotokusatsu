@@ -57,7 +57,7 @@ export const Modal = ({
 
         <div
           className={classNames(
-            'relative bg-white rounded-xl shadow-md w-full max-w-xs sm:max-w-2xl transform transition-all overflow-hidden',
+            'relative bg-white rounded-xl shadow-md w-full max-w-xs sm:max-w-2xl transform transition-transform overflow-hidden',
             {
               'animate-modal-out': isClosing,
               'animate-modal-in': !isClosing,

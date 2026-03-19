@@ -11,7 +11,7 @@ export const Button = ({ onClick, children, isActive }: ButtonProps) => {
     <button
       onClick={onClick}
       className={classNames(
-        'text-white text-xs px-3 py-1.5 rounded-xl md:shadow-md transition-all duration-200 active:scale-75 cursor-pointer',
+        'text-white text-xs px-3 py-1.5 rounded-xl md:shadow-md transition-all duration-75 active:scale-75 cursor-pointer',
         {
           'bg-sky-900': isActive,
           'bg-sky-700/40 hover:bg-sky-700/90': !isActive,

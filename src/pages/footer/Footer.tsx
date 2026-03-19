@@ -14,7 +14,7 @@ export const Footer = () => {
         <div className="flex items-center">
           <a
             href="https://github.com/axlchr12/orenotokusatsu/"
-            className="text-sky-800 text-[13px] font-semibold hover:text-sky-500 transition-all hover:scale-110"
+            className="text-sky-800 text-[13px] font-semibold hover:text-sky-500 transition-colors hover:scale-110"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -22,7 +22,7 @@ export const Footer = () => {
           </a>
           <a
             href="https://x.com/axlchr12"
-            className="text-sky-800 text-[13px] font-semibold hover:text-sky-500 transition-all hover:scale-110"
+            className="text-sky-800 text-[13px] font-semibold hover:text-sky-500 transition-colors hover:scale-110"
             target="_blank"
             rel="noopener noreferrer"
           >
