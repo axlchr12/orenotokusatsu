@@ -32,6 +32,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build Application
+        env:
+          VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
+        run: pnpm build
+
       - name: Auto Versioning
         run: |
           git config --global user.name "github-actions[bot]"
@@ -40,11 +45,6 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Application
-        env:
-          VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
-        run: pnpm build
 
       - name: Generate Deployment Metadata
         id: meta

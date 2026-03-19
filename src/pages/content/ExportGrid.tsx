@@ -129,7 +129,7 @@ export const ExportGrid = ({
         navigator.canShare &&
         navigator.canShare({ files: [file] })
       ) {
-        await new Promise<void>((resolve, reject) => {
+        await new Promise<void>(resolve => {
           setTimeout(async () => {
             try {
               await navigator.share({
