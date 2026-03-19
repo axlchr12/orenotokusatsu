@@ -32,29 +32,39 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build Application
-        env:
-          VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
-        run: pnpm build
-
-      - name: Auto Versioning
+      - name: Auto Versioning (Local Only)
+        id: versioning
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          npm version patch -m "v%s [skip ci]" --force
-          git push origin main
+          npm version patch --no-git-tag-version
+          NEW_VER=$(node -p "require('./package.json').version")
+          echo "new_version=$NEW_VER" >> $GITHUB_OUTPUT
+          echo "Bumping to v$NEW_VER"
+
+      - name: Build Application
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
+          VITE_APP_VERSION: ${{ steps.versioning.outputs.new_version }}
+        run: pnpm build
 
       - name: Generate Deployment Metadata
         id: meta
         run: |
           echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "build_num=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=orenotokusatsu --branch=main --commit-hash=${{ steps.meta.outputs.sha_short }} --commit-message="v${{ steps.meta.outputs.build_num }} - ${{ github.event.head_commit.message }}"
+          command: pages deploy dist --project-name=orenotokusatsu --branch=main --commit-hash=${{ steps.meta.outputs.sha_short }} --commit-message="Release v${{ steps.versioning.outputs.new_version }}"
+
+      - name: Finalize & Push Version
+        if: success()
+        run: |
+          git add package.json
+          git commit -m "chore: bump version to v${{ steps.versioning.outputs.new_version }} [skip ci]"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
