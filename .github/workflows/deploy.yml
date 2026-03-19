@@ -64,7 +64,7 @@ jobs:
         if: success()
         run: |
           git add package.json
-          git commit -m "chore: bump version to v${{ steps.versioning.outputs.new_version }} [skip ci]"
+          git commit -m "v${{ steps.versioning.outputs.new_version }} [skip ci]"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
