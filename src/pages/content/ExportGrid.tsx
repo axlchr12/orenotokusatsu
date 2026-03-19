@@ -41,9 +41,24 @@ export const ExportGrid = ({
       let dataUrl: string;
 
       if (isMobile) {
-        const { pixelRatio, quality, scale } = getExportConfig();
+        const { pixelRatio, quality, scale } = getExportConfig(element);
 
-        const canvas = await toCanvas(element!, {
+        const sharedStyle = {
+          transform: `scale(${scale})`,
+          transformOrigin: 'top left',
+          width: element.offsetWidth + 'px',
+          height: element.offsetHeight + 'px',
+          borderRadius: '0',
+          boxShadow: '0px 0px 0px rgba(0,0,0,0) !important',
+          filter: 'none !important',
+        };
+
+        const sharedFilter = (node: HTMLElement) => {
+          const exclusionClasses = ['no-export'];
+          return !exclusionClasses.some(cls => node.classList?.contains(cls));
+        };
+
+        const canvas = await toCanvas(element, {
           quality,
           pixelRatio,
           backgroundColor: '#eaefef',
@@ -52,19 +67,63 @@ export const ExportGrid = ({
           height: element.offsetHeight * scale,
           canvasWidth: element.offsetWidth * scale,
           canvasHeight: element.offsetHeight * scale,
-          style: {
-            transform: `scale(${scale})`,
-            transformOrigin: 'top left',
-            width: element.offsetWidth + 'px',
-            height: element.offsetHeight + 'px',
-          },
-          filter: node => {
-            const exclusionClasses = ['no-export'];
-            return !exclusionClasses.some(cls => node.classList?.contains(cls));
-          },
+          style: sharedStyle,
+          filter: sharedFilter,
         });
 
-        dataUrl = canvas.toDataURL('image/jpeg', quality);
+        const ctx = canvas.getContext('2d');
+        const pixel = ctx?.getImageData(0, 0, 1, 1).data;
+        const isBlank =
+          !pixel ||
+          (pixel[0] === 0 &&
+            pixel[1] === 0 &&
+            pixel[2] === 0 &&
+            pixel[3] === 0);
+
+        if (isBlank) {
+          console.warn('Canvas blank, retrying with lower scale...');
+          const fallbackCanvas = await toCanvas(element, {
+            quality: 0.55,
+            pixelRatio: 1,
+            backgroundColor: '#eaefef',
+            cacheBust: true,
+            width: element.offsetWidth,
+            height: element.offsetHeight,
+            canvasWidth: element.offsetWidth,
+            canvasHeight: element.offsetHeight,
+            style: {
+              ...sharedStyle,
+              transform: 'scale(1)',
+            },
+            filter: sharedFilter,
+          });
+          dataUrl = fallbackCanvas.toDataURL('image/jpeg', 0.55);
+        } else {
+          dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+
+        // const canvas = await toCanvas(element!, {
+        //   quality,
+        //   pixelRatio,
+        //   backgroundColor: '#eaefef',
+        //   cacheBust: true,
+        //   width: element.offsetWidth * scale,
+        //   height: element.offsetHeight * scale,
+        //   canvasWidth: element.offsetWidth * scale,
+        //   canvasHeight: element.offsetHeight * scale,
+        //   style: {
+        //     transform: `scale(${scale})`,
+        //     transformOrigin: 'top left',
+        //     width: element.offsetWidth + 'px',
+        //     height: element.offsetHeight + 'px',
+        //   },
+        //   filter: node => {
+        //     const exclusionClasses = ['no-export'];
+        //     return !exclusionClasses.some(cls => node.classList?.contains(cls));
+        //   },
+        // });
+
+        // dataUrl = canvas.toDataURL('image/jpeg', quality);
       } else {
         dataUrl = await toJpeg(element!, {
           quality: 0.75,

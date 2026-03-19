@@ -11,36 +11,39 @@ export const toBase64 = async (url: string) => {
   });
 };
 
+const MAX_CANVAS_SIDE = 4096;
+
 /**
  * Detects low-end devices based on available hardware hints.
- * - deviceMemory <= 2 GB → low-end
+ * - deviceMemory <= 4 GB → low-end
  * - hardwareConcurrency <= 4 cores (fallback when deviceMemory unavailable) → low-end
  * Only applies to mobile; desktop always treated as high-end.
  */
 export const isLowEndDevice = (): boolean => {
   if (!isMobile) return false;
   const memory = (navigator as any).deviceMemory as number | undefined;
-  if (memory !== undefined) return memory <= 2;
+  if (memory !== undefined) return memory <= 4;
   return navigator.hardwareConcurrency <= 4;
 };
 
-/**
- * Returns adaptive export config based on device capability.
- *
- * Low-end mobile  → pixelRatio 1, quality 0.60, scale 2
- *   Rationale: reduces canvas size 9× vs high-end path (scale 3 × pixelRatio 2),
- *   cuts memory pressure and encoding time significantly.
- *
- * High-end mobile → pixelRatio 2, quality 0.75, scale 3
- *   Rationale: retains original sharp output for modern devices & iPhones.
- *
- * Desktop         → handled via toJpeg, pixelRatio 2, quality 0.75 (unchanged).
- */
-export const getExportConfig = () => {
-  if (isLowEndDevice()) {
-    return { pixelRatio: 1, quality: 0.6, scale: 2 } as const;
+export const getExportConfig = (element: HTMLElement) => {
+  if (!isMobile) return { pixelRatio: 2, quality: 0.75, scale: 3 };
+
+  const scale3W = element.offsetWidth * 3;
+  const scale3H = element.offsetHeight * 3;
+
+  if (scale3W > MAX_CANVAS_SIDE || scale3H > MAX_CANVAS_SIDE) {
+    const safeScale = Math.floor(
+      Math.min(
+        MAX_CANVAS_SIDE / element.offsetWidth,
+        MAX_CANVAS_SIDE / element.offsetHeight,
+      ),
+    );
+    const scale = Math.max(1, safeScale);
+    return { pixelRatio: 1, quality: 0.6, scale };
   }
-  return { pixelRatio: 2, quality: 0.75, scale: 3 } as const;
+
+  return { pixelRatio: 2, quality: 0.75, scale: 3 };
 };
 
 /**
