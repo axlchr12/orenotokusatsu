@@ -4,6 +4,7 @@ import { useTokusatsuData } from '../dataHook';
 export type TokuItem = {
   id: number;
   image: string;
+  bigImage: string;
   rating: string;
   title: string;
   titleJapanese: string;
@@ -35,7 +36,7 @@ type UseAppProps = {
 export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
   const [selectedTokuTitles, setSelectedTokuTitles] = useState<
     (TokuItem | null)[]
-  >(Array(12).fill(null));
+  >(Array(9).fill(null));
   const [searchTitle, setSearchTitle] = useState<string>('');
 
   const {
@@ -43,8 +44,6 @@ export const useApp = ({ currentLanguage }: UseAppProps): UseAppMethods => {
     isLoading: isListLoading,
     isError: isListError,
   } = useTokusatsuData({ query: searchTitle });
-
-  //
 
   const resetSearch = useCallback(() => {
     setSearchTitle('');

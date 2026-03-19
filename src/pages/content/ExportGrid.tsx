@@ -3,7 +3,7 @@ import type { TranslateProps } from '../../dataHook';
 import { toCanvas, toJpeg } from 'html-to-image';
 import type { TokuItem } from '../../context';
 import classNames from 'classnames';
-import { toBase64 } from '../../utils';
+import { convertImagesToBase64Batched, getExportConfig } from '../../utils';
 
 type ExportGridProps = {
   translate: TranslateProps;
@@ -22,80 +22,55 @@ export const ExportGrid = ({
 
   const disabled = useMemo(() => {
     const isFullSelect = selectedWorks.every(work => work !== null);
-
     return !isFullSelect || isExporting;
   }, [selectedWorks, isExporting]);
 
   const handleShare = useCallback(async () => {
-    if (isExporting) return;
+    if (isExporting || !contentRef.current) return;
 
     setIsExporting(true);
 
-    if (!contentRef.current) {
-      throw new Error('Failed to share:', { cause: 'Element not found' });
-    }
-
-    const images = contentRef.current?.querySelectorAll('img');
-    const originalSrcs: string[] = [];
-
     try {
-      const promises = Array.from(images || []).map(async (img, index) => {
-        originalSrcs[index] = img.src;
-
-        if (img.src && !img.src.startsWith('data:')) {
-          try {
-            const base64 = await toBase64(img.src);
-            img.src = base64;
-          } catch (e) {
-            throw new Error(
-              `Failed to change image to base64 for index-${index}`,
-              { cause: e },
-            );
-          }
-        }
-      });
-
-      await Promise.all(promises);
+      const element = contentRef?.current;
+      const images = element.querySelectorAll('img');
+      const originalSrcs: string[] = [];
+      await convertImagesToBase64Batched(images, originalSrcs, 3);
 
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      let dataUrl;
+      let dataUrl: string;
 
       if (isMobile) {
-        const element = contentRef.current!;
-        const canvas = await toCanvas(element, {
-          quality: 0.75,
-          pixelRatio: 2,
+        const { pixelRatio, quality, scale } = getExportConfig();
+
+        const canvas = await toCanvas(element!, {
+          quality,
+          pixelRatio,
           backgroundColor: '#eaefef',
           cacheBust: true,
-          width: element.offsetWidth * 3,
-          height: element.offsetHeight * 3,
-          canvasWidth: element.offsetWidth * 3,
-          canvasHeight: element.offsetHeight * 3,
+          width: element.offsetWidth * scale,
+          height: element.offsetHeight * scale,
+          canvasWidth: element.offsetWidth * scale,
+          canvasHeight: element.offsetHeight * scale,
           style: {
-            transform: 'scale(3)',
+            transform: `scale(${scale})`,
             transformOrigin: 'top left',
             width: element.offsetWidth + 'px',
             height: element.offsetHeight + 'px',
-            borderRadius: '0',
-            boxShadow: '0px 0px 0px rgba(0,0,0,0) !important',
-            filter: 'none !important',
           },
           filter: node => {
             const exclusionClasses = ['no-export'];
             return !exclusionClasses.some(cls => node.classList?.contains(cls));
           },
         });
-        dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+
+        dataUrl = canvas.toDataURL('image/jpeg', quality);
       } else {
-        dataUrl = await toJpeg(contentRef.current!, {
+        dataUrl = await toJpeg(element!, {
           quality: 0.75,
           backgroundColor: '#eaefef',
           cacheBust: false,
           pixelRatio: 2,
-          style: {
-            filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.1))',
-          },
           filter: node => {
             const exclusionClasses = ['no-export'];
             return !exclusionClasses.some(cls => node.classList?.contains(cls));
@@ -103,7 +78,7 @@ export const ExportGrid = ({
         });
       }
 
-      images?.forEach((img, index) => {
+      images.forEach((img, index) => {
         if (originalSrcs[index]) {
           img.src = originalSrcs[index];
         }
@@ -128,7 +103,6 @@ export const ExportGrid = ({
           files: [file],
           title: shareTitle,
           text: fullText,
-          // url: window.location.href,
         });
       } else {
         const link = document.createElement('a');
@@ -139,16 +113,14 @@ export const ExportGrid = ({
         document.body.removeChild(link);
       }
     } catch (error) {
-      setIsExporting(false);
       throw new Error('Failed to share:', { cause: error });
     } finally {
       setIsExporting(false);
     }
-  }, [isExporting, isMobile, translate, contentRef]);
+  }, [isExporting, translate, contentRef]);
 
   const _onClick = useCallback(() => {
     if (disabled) return;
-
     return handleShare();
   }, [disabled, handleShare]);
 

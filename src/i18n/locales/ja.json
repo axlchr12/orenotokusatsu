@@ -1,6 +1,6 @@
 {
   "title": "俺の<0>特撮</0>",
-  "description": "好きな12特撮作品を選んで、SNSでシェアしよう！",
+  "description": "好きな9特撮作品を選んで、SNSでシェアしよう！",
   "titleModal": "作品を検索",
   "addItem": "追加する",
   "search": "検索",
@@ -13,6 +13,6 @@
   "share": "シェアする",
   "shareOnProcess": "共有処理中...",
   "overviewShowModalTitle": "作品の詳細",
-  "titleToShare": "俺の特撮ベスト12",
-  "textToShare": "俺の特撮ベスト12を作ってみた！みんなの推し作品も教えて！"
+  "titleToShare": "俺の特撮ベスト9",
+  "textToShare": "俺の特撮ベスト9を作ってみた！みんなの好きな特撮作品も教えて！"
 }

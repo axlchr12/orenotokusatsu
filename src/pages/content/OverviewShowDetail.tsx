@@ -18,7 +18,7 @@ export const OverviewShowDetail = ({
         >
           <div className="w-48 h-full bg-gray-200 rounded-xl border border-gray-100">
             <img
-              src={tokuTitle.image || 'https://placehold.co/150'}
+              src={tokuTitle.bigImage || 'https://placehold.co/150'}
               className="w-full h-full object-cover"
               alt={tokuTitle.title}
               referrerPolicy="no-referrer"

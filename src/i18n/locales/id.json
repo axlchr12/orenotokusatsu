@@ -1,6 +1,6 @@
 {
   "title": "<0>Tokusatsu</0>Ku",
-  "description": "Pilih 12 judul Tokusatsu favoritmu dan bagikan ke media sosial!",
+  "description": "Pilih 9 judul Tokusatsu favoritmu dan bagikan ke media sosial!",
   "titleModal": "Cari Judul",
   "addItem": "Tambah",
   "search": "Cari",
@@ -13,6 +13,6 @@
   "share": "Bagikan!",
   "shareOnProcess": "Memproses...",
   "overviewShowModalTitle": "Detail Judul",
-  "titleToShare": "Top 12 Tokusatsu Favoritku",
-  "textToShare": "Inilah top 12 Tokusatsu versi gue! Gimana top 12 versi lu? Share balik dong di sini:"
+  "titleToShare": "Top 9 Tokusatsu Favoritku",
+  "textToShare": "Inilah top 9 Tokusatsu versi gue! Gimana top 9 versi lu? Share balik dong di sini:"
 }

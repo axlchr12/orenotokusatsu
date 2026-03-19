@@ -29,7 +29,7 @@ const searchTokuMulti = async (query: string) => {
         const isNotAnime = !item.genre_ids?.includes(16);
         return isMedia && isJapan && hasTokuVibe && isNotAnime;
       })
-      .slice(0, 4);
+      .slice(0, 5);
 
     const results = await Promise.all(
       filteredEN.map(async (item: any) => {
@@ -50,7 +50,8 @@ const searchTokuMulti = async (query: string) => {
             year: date ? date.split('-')[0] : 'N/A',
             overview: item.overview || 'No overview.',
             overviewJp: itemJP?.overview || '詳細なし',
-            image: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w342${itemJP?.poster_path || item.poster_path}&output=webp&q=70&il&n=-1`,
+            image: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w200${itemJP?.poster_path || item.poster_path}&output=jpg&q=70&il&n=-1`,
+            bigImage: `https://wsrv.nl/?url=https://image.tmdb.org/t/p/w342${itemJP?.poster_path || item.poster_path}&output=jpg&q=70&il&n=-1`,
             type: item.media_type,
             rating: item.vote_average ? item.vote_average.toFixed(1) : '0',
           };

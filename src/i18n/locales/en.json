@@ -1,6 +1,6 @@
 {
   "title": "My <0>Tokusatsu</0>",
-  "description": "Pick your 12 favorite Tokusatsu titles and share them on social media!",
+  "description": "Pick your 9 favorite Tokusatsu titles and share them on social media!",
   "titleModal": "Search Titles",
   "addItem": "Add",
   "search": "Search",
@@ -13,6 +13,6 @@
   "share": "Share!",
   "shareOnProcess": "Sharing...",
   "overviewShowModalTitle": "Title Details",
-  "titleToShare": "My Top 12 Tokusatsu List",
-  "textToShare": "Just ranked my Top 12 Tokusatsu of all time! What’s yours? Create your own list here:"
+  "titleToShare": "My Top 9 Tokusatsu List",
+  "textToShare": "Just ranked my Top 9 Tokusatsu of all time! What’s yours? Create your own list here:"
 }
