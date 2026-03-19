@@ -31,13 +31,13 @@ export const ExportGrid = ({
 
   const handleShare = useCallback(async () => {
     if (isExporting || !contentRef.current) return;
-
     setIsExporting(true);
 
     try {
-      const element = contentRef?.current;
+      const element = contentRef.current;
       const images = element.querySelectorAll('img');
       const originalSrcs: string[] = [];
+
       await convertImagesToBase64Batched(images, originalSrcs, 3);
       await waitForImages(images);
       await new Promise(resolve => requestAnimationFrame(resolve));
@@ -47,7 +47,6 @@ export const ExportGrid = ({
 
       if (isMobile) {
         const { pixelRatio, quality, scale } = getExportConfig(element);
-
         const sharedStyle = {
           transform: `scale(${scale})`,
           transformOrigin: 'top left',
@@ -57,11 +56,8 @@ export const ExportGrid = ({
           boxShadow: '0px 0px 0px rgba(0,0,0,0) !important',
           filter: 'none !important',
         };
-
-        const sharedFilter = (node: HTMLElement) => {
-          const exclusionClasses = ['no-export'];
-          return !exclusionClasses.some(cls => node.classList?.contains(cls));
-        };
+        const sharedFilter = (node: HTMLElement) =>
+          !['no-export'].some(cls => node.classList?.contains(cls));
 
         const canvas = await toCanvas(element, {
           quality,
@@ -86,7 +82,6 @@ export const ExportGrid = ({
             pixel[3] === 0);
 
         if (isBlank) {
-          console.warn('Canvas blank, retrying with lower scale...');
           const fallbackCanvas = await toCanvas(element, {
             quality: 0.55,
             pixelRatio: 1,
@@ -96,56 +91,27 @@ export const ExportGrid = ({
             height: element.offsetHeight,
             canvasWidth: element.offsetWidth,
             canvasHeight: element.offsetHeight,
-            style: {
-              ...sharedStyle,
-              transform: 'scale(1)',
-            },
+            style: { ...sharedStyle, transform: 'scale(1)' },
             filter: sharedFilter,
           });
           dataUrl = fallbackCanvas.toDataURL('image/jpeg', 0.55);
         } else {
           dataUrl = canvas.toDataURL('image/jpeg', quality);
         }
-
-        // const canvas = await toCanvas(element!, {
-        //   quality,
-        //   pixelRatio,
-        //   backgroundColor: '#eaefef',
-        //   cacheBust: true,
-        //   width: element.offsetWidth * scale,
-        //   height: element.offsetHeight * scale,
-        //   canvasWidth: element.offsetWidth * scale,
-        //   canvasHeight: element.offsetHeight * scale,
-        //   style: {
-        //     transform: `scale(${scale})`,
-        //     transformOrigin: 'top left',
-        //     width: element.offsetWidth + 'px',
-        //     height: element.offsetHeight + 'px',
-        //   },
-        //   filter: node => {
-        //     const exclusionClasses = ['no-export'];
-        //     return !exclusionClasses.some(cls => node.classList?.contains(cls));
-        //   },
-        // });
-
-        // dataUrl = canvas.toDataURL('image/jpeg', quality);
       } else {
-        dataUrl = await toJpeg(element!, {
+        // desktop (laptop, pc)
+        dataUrl = await toJpeg(element, {
           quality: 0.75,
           backgroundColor: '#eaefef',
           cacheBust: false,
           pixelRatio: 2,
-          filter: node => {
-            const exclusionClasses = ['no-export'];
-            return !exclusionClasses.some(cls => node.classList?.contains(cls));
-          },
+          filter: node =>
+            !['no-export'].some(cls => node.classList?.contains(cls)),
         });
       }
 
       images.forEach((img, index) => {
-        if (originalSrcs[index]) {
-          img.src = originalSrcs[index];
-        }
+        if (originalSrcs[index]) img.src = originalSrcs[index];
       });
 
       const rawTitle = translate('title');
@@ -163,10 +129,25 @@ export const ExportGrid = ({
         navigator.canShare &&
         navigator.canShare({ files: [file] })
       ) {
-        await navigator.share({
-          files: [file],
-          title: shareTitle,
-          text: fullText,
+        await new Promise<void>((resolve, reject) => {
+          setTimeout(async () => {
+            try {
+              await navigator.share({
+                files: [file],
+                title: shareTitle,
+                text: fullText,
+              });
+              resolve();
+            } catch (e) {
+              const link = document.createElement('a');
+              link.download = fileName;
+              link.href = dataUrl;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              resolve();
+            }
+          }, 0);
         });
       } else {
         const link = document.createElement('a');
@@ -177,11 +158,6 @@ export const ExportGrid = ({
         document.body.removeChild(link);
       }
     } catch (error) {
-      const msg =
-        (error as any)?.cause?.message ??
-        (error as any)?.message ??
-        String(error);
-      alert('Error: ' + msg);
       throw new Error('Failed to share:', { cause: error });
     } finally {
       setIsExporting(false);
