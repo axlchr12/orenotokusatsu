@@ -80,7 +80,6 @@ const searchTokuMulti = async (query: string) => {
           }
         }),
     );
-    console.log({ results });
     return results;
   } catch (error) {
     throw new Error('Failed to capture data:', { cause: error });
