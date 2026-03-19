@@ -114,7 +114,7 @@ export const ExportGrid = ({
       const shareTitle = translate('titleToShare');
       const cleanTitle = rawTitle.replace(/<\/?[0-9]+>/g, '');
       const fileName = `${cleanTitle}.jpg`;
-      const fullText = `${shareText}\n\n${window.location.href}`;
+      const fullText = `${shareText}\n\n${window.location.href}\n\n#俺の特撮\n#OrenoTokusatsu`;
 
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File([blob], fileName, { type: 'image/jpeg' });
