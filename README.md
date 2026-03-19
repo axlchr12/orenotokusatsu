@@ -26,7 +26,7 @@ The app is built with a global audience in mind, featuring full localization for
 * **Localization:** [i18next](https://www.i18next.com/)
 
 ## Current Problem
-* **API Filtering Limitations:** TMDB lacks a specific "Tokusatsu" category or keyword filter in its search endpoint. Consequently, all filtering (Genre IDs, Original Language, and excluding Anime) must be handled **manually on the frontend**, which limits search precision.
+* **API Filtering Limitations:** Since this repo **uses** TMDB's API for multi search, TMDB lacks a specific "Tokusatsu" category or keyword filter in its search endpoint. Consequently, all filtering (Genre IDs, Original Language, and excluding Anime) must be handled **manually on the frontend**, which limits search precision.
 * **Localization Mismatch:** The `/search/multi` endpoint does not support fetching dual-language metadata (EN/JP) simultaneously.
 * **Double-Fetching Overhead:** The app currently performs an initial English search, then maps through the results to fetch specific Japanese details (`overviewJp`) via secondary API calls, impacting performance.
 * **Naming Inconsistencies:** Manual mapping is required for certain localized titles (e.g., "Masked Rider DCD" instead of "Kamen Rider Decade").
