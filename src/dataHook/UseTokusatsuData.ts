@@ -29,11 +29,10 @@ const searchTokuMulti = async (query: string) => {
           [10765, 10759, 878].includes(id),
         );
 
-        let isAnime = !genreIds.includes(16);
+        let isAnime = genreIds.includes(16);
 
-        const tolerateQuery = ['bakuage', 'bakuage sentai'].includes(
-          query.toLowerCase(),
-        );
+        const whitelist = ['bakuage', 'bakuage sentai'];
+        const tolerateQuery = whitelist.includes(query.toLowerCase());
 
         const passAnimeFilter = !isAnime || tolerateQuery;
 
