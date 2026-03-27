@@ -23,6 +23,9 @@ dependencies:
   i18next-http-backend:
     specifier: ^3.0.2
     version: 3.0.2
+  logrocket:
+    specifier: ^12.1.0
+    version: 12.1.0
   react:
     specifier: ^19.0.0
     version: 19.2.4
@@ -2127,6 +2130,10 @@ packages:
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /logrocket@12.1.0:
+    resolution: {integrity: sha512-WZXCwtPam15ktseKzP2SAd2PgHXmr41++8Lgg30VyW/mpAbHaJAZm5//C+l9Yt5x6HLfwH76PuY47RXpKUvTuA==}
+    dev: false
 
   /lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
