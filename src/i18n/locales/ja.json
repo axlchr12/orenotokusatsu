@@ -14,5 +14,6 @@
   "shareOnProcess": "共有処理中...",
   "overviewShowModalTitle": "作品の詳細",
   "titleToShare": "俺の特撮ベスト9",
-  "textToShare": "俺の特撮ベスト9を作ってみた！みんなの好きな特撮作品も教えて！ \n\n{{url}}"
+  "textToShare": "俺の特撮ベスト9を作ってみた！みんなの好きな特撮作品も教えて！ \n\n{{url}}",
+  "tipsToSearchData": "データ提供元の制限により、正式名称で検索してください（例：『仮面ライダードライブ』）。また、JPボタンがONの場合は必ず日本語で検索してください（例：『Drive』や『tv-2014』は無効です）。"
 }

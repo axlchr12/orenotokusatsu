@@ -33,6 +33,9 @@ export const Content = () => {
           <span className="text-black text-xs">{translate('description')}</span>
         </div>
         <ChangeLanguageButton i18n={i18n} />
+        <div className="text-xs my-2 w-5/6 sm:w-4/6 mx-auto">
+          {translate('tipsToSearchData')}
+        </div>
         <TitleSelectionList
           translate={translate}
           appState={appState}

@@ -14,5 +14,6 @@
   "shareOnProcess": "Memproses...",
   "overviewShowModalTitle": "Detail Judul",
   "titleToShare": "Top 9 Tokusatsu Favoritku",
-  "textToShare": "Inilah top 9 Tokusatsu versi gue! Gimana top 9 versi lu? \n\n{{url}}"
+  "textToShare": "Inilah top 9 Tokusatsu versi gue! Gimana top 9 versi lu? \n\n{{url}}",
+  "tipsToSearchData": "Karena keterbatasan penyedia data, mohon gunakan judul lengkap saat mencari (contoh: gunakan 'Kamen Rider Drive', bukan hanya 'Drive')."
 }
