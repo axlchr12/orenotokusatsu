@@ -15,5 +15,5 @@
   "overviewShowModalTitle": "Title Details",
   "titleToShare": "My Top 9 Tokusatsu List",
   "textToShare": "Just ranked my top 9 Tokusatsu of all time! What’s yours? \n\n{{url}}",
-  "tipsToSearchData": "Due to data provider limitations, please search using full titles (e.g., instead of 'Drive,' search for 'Kamen Rider Drive')."
+  "tipsToSearchData": "Due to data provider (TheMovieDB) limitations, some titles may not be available. If a title is not found, please try searching for the full name. For example, search for 'Kamen Rider Drive' instead of just 'Drive'. Additionally, search using the title only; adding terms like 'tv-2014' will not work."
 }
